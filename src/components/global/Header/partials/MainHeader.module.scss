@@ -1,0 +1,160 @@
+@import '../../../../styles/variable';
+
+.mainMenu {
+  /** main menu style**/
+  li.mainMenuItem {
+    padding: 10px 20px;
+    text-align: center;
+    position: relative;
+    transition: all .5s;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 70%;
+      border-right: 1px dotted $app-white;
+    }
+    &:first-of-type::before {
+      border-right: none;
+    }
+
+    &:nth-child(2):before {
+      border-right: none;
+    }
+    
+    /** sub menu box**/
+    .subContentBox {
+      visibility: hidden;
+      height: 100%;
+      transition: all 0.3s;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      transform: perspective(600px) rotateX(-90deg);
+      transform-origin: 0px 0px 0px;
+      border: 1px solid $border-gray;
+      overflow: hidden;
+      .subMenuItem {
+        padding: 10px 10px;
+        transition: all 0.4s;
+        color: $app-black;
+        a {
+          visibility: visible;
+          transition: all 0.4s;
+          color: $app-black;
+        }
+        &:hover {
+          background: $orange-600;
+        }
+        &:hover a {
+          color: $app-white;
+        }
+      }
+    }
+
+    &:hover .subContentBox,
+    &:hover .subMenuItem a {
+      visibility: visible;
+      transform: perspective(300px) rotateX(0deg);
+      transform-origin: 0px 0px 0px;
+    }
+
+    &:hover a{
+        color: $menu-color;
+    }
+  }
+
+  /** category style */
+  li.categoryItem {
+    position: relative;
+    padding: 10px 20px;
+    // main category box style
+    .mainCategoryBox {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: $category-box;
+      text-align: left;
+      padding: 0 10px;
+      border: 1px solid $app-black;
+      .mainCategoryItem {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 0px;
+        border-bottom: 1px dashed $app-black-300;
+        font-weight: 400;
+        font-size: 1rem;
+        transition: all 0.3s;
+        position: relative;
+        &:last-child {
+          border-bottom: none;
+        }
+        span {
+          color: $app-black;
+          text-transform: capitalize;
+          transition: all 0.3s;
+        }
+        &:hover span {
+          color: $app-color;
+        }
+        &:hover {
+          border-bottom-color: $app-color;
+        }
+        // sub category box style
+        .subCategoryBox {
+          position: absolute;
+          top: 0;
+          left: 104%;
+          width: 100%;
+          background: $app-white;
+          text-align: left;
+          padding: 0 10px;
+          border: 1px solid $app-black;
+          transition: all 0.3s ease-in-out;
+          visibility: hidden;
+          overflow: hidden;
+          opacity: 0;
+          .subCategoryItem {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px dashed $app-black-300;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            &:last-child {
+              border-bottom: none;
+            }
+            span {
+              color: $app-black;
+              text-transform: capitalize;
+              transition: all 0.3s;
+            }
+            &:hover span {
+              color: $app-color;
+            }
+            &:hover {
+              border-bottom-color: $app-color;
+            }
+          }
+        }
+        // hover main box
+        &:hover .subCategoryBox {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

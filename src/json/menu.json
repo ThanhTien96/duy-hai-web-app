@@ -1,0 +1,38 @@
+[
+    {
+        "link": null,
+        "title": "trang chủ",
+        "child": []
+    },
+    {
+        "link": "about",
+        "title": "giới thiệu",
+        "child": []
+    },
+    {
+        "link": "machine",
+        "title": "phụ tùng chính hãng",
+        "child": [
+            {
+                "link": "machine-stihl",
+                "title": "phụ tùng stihl",
+                "icon": ""
+            }
+        ]
+    },
+    {
+        "link": "repair",
+        "title": "sửa chữa",
+        "child": []
+    },
+    {
+        "link": "news",
+        "title": "tin tức",
+        "child": []
+    },
+    {
+        "link": "contact",
+        "title": "liên hệ",
+        "child": []
+    }
+]
