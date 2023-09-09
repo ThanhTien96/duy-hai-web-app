@@ -7,10 +7,25 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'transparent': 'transparent',
+      'white': '#ffffff',
+      'black': '#000000',
+      'app-500': '#ff8027',
+      'app-600': '#ea580c',
+      'gray-border': '#cccccc',
+      'sub-text': '#38383866',
+      'error': '#ff0000eb',
+      'warning': '#ccff33',
+      'success': '#33ff66f2',
+      'primary': '#3366ff',
+      'menu-active': '#f9e68a',
+      'yellow-300': '#fff000'
+    },
     container: {
       center: true,
       padding: {
-        DEFAULT: '1rem',
+        DEFAULT: '0.5rem',
         md: '2rem',
         lg: '3.75rem',
         xl: '2.5rem',

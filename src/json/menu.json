@@ -1,38 +1,64 @@
-[
-    {
-        "link": null,
-        "title": "trang chủ",
-        "child": []
-    },
-    {
-        "link": "about",
-        "title": "giới thiệu",
-        "child": []
-    },
-    {
-        "link": "machine",
-        "title": "phụ tùng chính hãng",
-        "child": [
+{
+    "data": {
+        "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+        "active": true,
+        "logo": "http://localhost:8080/public/logo/1693038496459_hai-tra-tan-logo.png",
+        "navlink": [
             {
-                "link": "machine-stihl",
-                "title": "phụ tùng stihl",
-                "icon": ""
+                "maNavLink": "0ffb6d76-9e2f-4b26-80ad-1a00e86a5e4d",
+                "tenNavLink": "sửa chữa",
+                "url": "/repair",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 4,
+                "subLink": []
+            },
+            {
+                "maNavLink": "13963d06-bf9b-4414-b3a6-aa8dc7f44651",
+                "tenNavLink": "giới thiệu",
+                "url": "/about",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 2,
+                "subLink": []
+            },
+            {
+                "maNavLink": "3f4a62eb-cffb-481f-b01e-714e3e7a3455",
+                "tenNavLink": "liên hệ",
+                "url": "/contact",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 6,
+                "subLink": []
+            },
+            {
+                "maNavLink": "6fe96686-7011-430c-97d9-3fb22c7ed524",
+                "tenNavLink": "tin tức",
+                "url": "/news",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 5,
+                "subLink": []
+            },
+            {
+                "maNavLink": "ddfd065e-b736-4c35-9087-0d84e45f5cb0",
+                "tenNavLink": "phụ tùng chính hãng",
+                "url": "/accessary",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 3,
+                "subLink": [
+                    {
+                        "id": "37483b82-6872-431e-aef6-83218c410cc2",
+                        "url": "/accessary-stihl",
+                        "tenSubLink": "phụ tùng stihl",
+                        "maNavLink": "ddfd065e-b736-4c35-9087-0d84e45f5cb0"
+                    }
+                ]
+            },
+            {
+                "maNavLink": "f434ed54-d023-4078-9184-10b3b3daea78",
+                "tenNavLink": "trang chủ",
+                "url": "/",
+                "maMenu": "1991bf6b-ad50-4c7f-bdbc-6ef6e5de3238",
+                "role": 1,
+                "subLink": []
             }
         ]
-    },
-    {
-        "link": "repair",
-        "title": "sửa chữa",
-        "child": []
-    },
-    {
-        "link": "news",
-        "title": "tin tức",
-        "child": []
-    },
-    {
-        "link": "contact",
-        "title": "liên hệ",
-        "child": []
     }
-]
+}

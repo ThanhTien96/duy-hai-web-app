@@ -12,10 +12,11 @@ type MenuLinkProps = {
 
 const MenuLink = ({link, content}: MenuLinkProps) => {
   const activeSegment = useSelectedLayoutSegment();
+
   return (
     <Link 
-    className={clsx('text-white capitalize text-[18px]', {
-      '!text-yellow-200': link === activeSegment
+    className={clsx('text-white capitalize xl:text-[18px] lg:text-[14px]', {
+      '!text-menu-active': link === activeSegment || (link === '/' && !activeSegment)
     })}
     href={link || ''}>{content}</Link>
   )

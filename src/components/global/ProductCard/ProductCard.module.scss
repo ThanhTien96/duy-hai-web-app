@@ -1,0 +1,61 @@
+@import '../../../styles/variable';
+.cardItem {
+  position: relative;
+
+  .cardDiscount {
+    position: absolute;
+    top: 10px;
+    left: -6px;
+    width: 50px;
+    height: 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $red-500;
+    z-index: 10;
+    color: $app-white;
+    border-radius: 5px 0 0 0;
+    span {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 88%;
+      z-index: 10;
+      border-right: 6px solid red;
+      border-bottom: 10px solid transparent;
+      border-top: 0px solid transparent;
+      border-left: 6px solid transparent;
+      //   transform: rotate(-45deg);
+    }
+    .cardDiscountStick {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 100%;
+        z-index: 10;
+        border-right: 10px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-top: 0px solid transparent;
+        border-left: 10px solid $red-500;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        z-index: 10;
+        border-right: 10px solid transparent;
+        border-bottom: 0px solid transparent;
+        border-top: 15px solid transparent;
+        border-left: 10px solid $red-500;
+      }
+    }
+  }
+}

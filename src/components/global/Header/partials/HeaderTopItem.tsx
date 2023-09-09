@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import Link from 'next/link';
 type HeaderTopItemProps = {
   icon?: React.ReactNode;
   title?: string;
@@ -30,7 +29,7 @@ const HeaderTopItem = ({
         {cart ? (
           <h6 className="font-semibold">
             {cart && (
-              <span className="w-5 h-5 bg-red-600 inline-flex items-center justify-center text-white font-medium rounded-full mr-2">
+              <span className="w-5 h-5 bg-app-500 inline-flex items-center justify-center text-white font-medium rounded-full mr-2">
                 {cartContent}
               </span>
             )}

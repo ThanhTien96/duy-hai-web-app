@@ -5,7 +5,6 @@ import Image from 'next/image';
 import React from 'react';
 import { Input } from 'antd';
 import HeaderTopItem from './partials/HeaderTopItem';
-import { SearchIcon } from '@/icons';
 
 const { Search } = Input;
 
@@ -23,21 +22,22 @@ const TopHeader = () => {
             <Image src={require('@/assets/hai-tra-tan-logo.png')} alt="hai tra tan logo" width={80} height={80} />
           </div>
           {/* search engine */}
-          <div>
+          <div className='max-xs:hidden sm:hidden max-sm:hidden md:hidden lg:block'>
             <SearchInput width={400} placeholder='Nhập Từ Khoá' onSearch={onSearch}/>
           </div>
           {/* shopping cart and hotline */}
 
           <div className='flex items-center justify-between gap-16'>
             <HeaderTopItem
-              icon={<PhoneFilled className='text-[30px] text-orange-500' />}
+              icon={<PhoneFilled className='text-[30px] text-app-500' />}
               title="Hotline"
               subTitle="0974 644 973"
+              className='max-xs:hidden sm:hidden max-sm:hidden md:hidden lg:flex'
               cart={false}
             />
             <HeaderTopItem
             className="cursor-pointer"
-              icon={<ShoppingCartOutlined className='text-[42px] text-orange-500' />}
+              icon={<ShoppingCartOutlined className='text-[42px] text-app-500' />}
               title="Giỏ Hàng"
               subTitle="Sản Phẩm"
               cartContent={0}

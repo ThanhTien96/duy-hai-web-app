@@ -1,0 +1,39 @@
+@import '../../../styles/variable';
+
+.buttonShared{
+    padding: 5px 15px;
+    background-color: $app-color;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: $app-white;
+    transition: all .5s;
+    border-radius: 4px;
+    &:hover{
+        background-color: $orange-600;
+    }
+}
+
+.buttonOutline{
+    padding: 5px 15px;
+    border: 1px solid $app-color;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: $app-color;
+    transition: all .5s;
+    border-radius: 4px;
+    &:hover{
+        background-color: $app-color;
+        color: $app-white;
+    }
+}
+
+/* Button size **/
+.buttonSmall{
+    padding: 5px 10px;
+    font-size: 10px;
+}
+
+.buttonLarge{
+    padding: 15px 30px;
+    font-size: 20px;
+}

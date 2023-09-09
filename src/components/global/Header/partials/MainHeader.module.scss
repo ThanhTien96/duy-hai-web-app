@@ -1,6 +1,7 @@
 @import '../../../../styles/variable';
 
 .mainMenu {
+  z-index: 1000;
   /** main menu style**/
   li.mainMenuItem {
     padding: 10px 20px;
@@ -49,7 +50,7 @@
           color: $app-black;
         }
         &:hover {
-          background: $orange-600;
+          background: $app-color;
         }
         &:hover a {
           color: $app-white;
@@ -75,6 +76,7 @@
     padding: 10px 20px;
     // main category box style
     .mainCategoryBox {
+      z-index: 100;
       position: absolute;
       top: 100%;
       left: 0;
@@ -103,13 +105,14 @@
           transition: all 0.3s;
         }
         &:hover span {
-          color: $app-color;
+          color: $app-color !important;
         }
         &:hover {
           border-bottom-color: $app-color;
         }
         // sub category box style
         .subCategoryBox {
+          z-index: 100;
           position: absolute;
           top: 0;
           left: 104%;
@@ -136,12 +139,12 @@
             &:last-child {
               border-bottom: none;
             }
-            span {
+            p {
               color: $app-black;
               text-transform: capitalize;
               transition: all 0.3s;
             }
-            &:hover span {
+            &:hover p {
               color: $app-color;
             }
             &:hover {
@@ -156,5 +159,93 @@
         }
       }
     }
+  }
+}
+
+/** RESPONSIVE **/
+
+@media screen and (max-width: 1300px) {
+  .mainMenu {
+  
+    /** main categories **/
+    li.categoryItem{
+      font-size: 14px;
+      padding: 12px 20px;
+
+      .mainCategoryItem{
+        font-size: 14px !important;
+      }
+      .subCategoryBox{
+        width: 250px !important;
+        .subCategoryItem{
+          font-size: 14px !important;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 1022.98px) {
+  .mainMenu {
+    .moblieMenu{
+      transition: all .5s ;
+      left: -120%;
+      width: 0;
+      visibility: hidden;
+    }
+    .activeMenu{
+      visibility: visible;
+      left: 0;
+      width: 50%;
+
+    }
+
+    .subCategory{
+      visibility: hidden;
+      right: -120%;
+      width: 0;
+      top: 0;
+      height: 100%;
+      transition: all .4s;
+    }
+    .activeSubCategory{
+      visibility: visible;
+      right: 0;
+      width: 100%;
+    }
+
+
+  }
+}
+
+@media screen and (max-width: 768.98px) {
+  .mainMenu {
+    .moblieMenu{
+      visibility: hidden;
+      left: -120%;
+      width: 0;
+      transition: all .4s ;
+    }
+    .activeMenu{
+      visibility: visible;
+      left: 0;
+      width: 80%;
+    }
+
+    .subCategory{
+      visibility: hidden;
+      right: -120%;
+      width: 0;
+      top: 0;
+      height: 100%;
+      transition: all .4s;
+    }
+    .activeSubCategory{
+      visibility: visible;
+      right: 0;
+      width: 100%;
+    }
+
   }
 }
