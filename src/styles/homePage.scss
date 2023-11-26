@@ -21,7 +21,18 @@
 }
 
 .contact_section{
+    width: 100%;
     background-image: url('../assets/contact/bg_nhantin.png');
     background-repeat: no-repeat;
     background-size: cover;
+
+}
+
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-large .ant-form-item .ant-form-item-label>label{
+    height: auto;
+}
+
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-item .ant-form-item-label >label{
+    color: white !important;
 }

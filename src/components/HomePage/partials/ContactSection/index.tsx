@@ -6,8 +6,8 @@ import clsx from 'clsx';
 
 const ContactSection = () => {
   return (
-    <div className={clsx("grid grid-cols-12 gap-8 bg-black/60 p-2 lg:p-8")}>
-      <div className="col-span-12 lg:col-span-7">
+    <div className={clsx("grid grid-cols-12 gap-4 bg-black/60 p-2 lg:p-8 w-full")}>
+      <div className="col-span-12 overflow-hidden lg:col-span-7">
         <AppTitle isBlack title="Liên Hệ Chúng Tôi" />
         <ContactForm />
       </div>

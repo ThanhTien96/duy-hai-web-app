@@ -12,10 +12,12 @@ import {
   MenuUnfoldOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import logoImage from '@/assets/hai-tra-tan-logo.png';
-import { Avatar } from 'antd';
-import { useEffect, useState } from 'react';
-import { MainCategoryType, SubCategoryType } from '@/types/category';
+import { useState } from 'react';
+import { IMainCategory, IMainNavLink, IMenu, ISubCategory, ISubNavLink } from '@/@types/global';
+import useScroll from '@/hooks/useScroll';
+import { usePathname } from 'next/navigation';
+
+
 type ChildSubLinkType = {
   id: string;
   url: string;
@@ -39,14 +41,17 @@ export type MenuDataType = {
   navlink:NavLinkType[];
 };
 
-
-
 type MainHeaderProps = {
-  menuData: { data: MenuDataType };
-  categoriesData: {
-    data: MainCategoryType[];
-  };
+  menuData?: IMenu;
+  categoriesData: IMainCategory[];
 };
+
+export interface TInitHeaderState {
+  openSubMenu?: string;
+  openSubCategory?: string;
+  openCategory: boolean;
+  openMenu: boolean;
+}
 
 const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
   /** control mobile */
@@ -54,6 +59,10 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
   const [openSubCategory, setOpenSubCategory] = useState<string>('');
   const [openCategory, setOpenCategory] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [heightOffSet] = useScroll();
+  const [mouseHover, setMouseHover] = useState<boolean>(false);
+  const pathname = usePathname()
+
 
   const handleCloseAll = () => {
     setOpenCategory(false);
@@ -61,6 +70,8 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
     setOpenSubCategory('');
     setOpenSubMenu('');
   };
+
+
 
   /** handle control sub menu */
   const handleOpenSubMenu = (id: string) => {
@@ -84,20 +95,24 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
           <ul className=" z-50 items-center max-xs:hidden sm:hidden xs:hidden md:hidden lg:flex">
             {/* categories */}
             <li
+            onMouseLeave={() => setMouseHover(false)}
               className={clsx(
                 'xl:w-[300px] lg:w-[200px] text-white xl:text-[18px] lg:text-[14px] font-medium bg-black text-right',
                 styles.categoryItem,
               )}
             >
-              <h5 className="flex items-center xl:gap-8 lg:gap-2">
+              <h5 onMouseOver={() => setMouseHover(true)}  className={clsx("flex items-center xl:gap-8 lg:gap-2 cursor-pointer", styles.categoriesTitle)}>
                 {' '}
                 <UnorderedListOutlined className="lg-text-2xl" /> Tất Cả Sản
                 Phẩm
               </h5>
               {/* print main categories */}
-              <ul className={clsx(styles.mainCategoryBox)}>
-                {categoriesData.data.map(
-                  (ele: MainCategoryType, index: number) => {
+              <ul className={clsx(styles.mainCategoryBox, 'transition-all duration-200', {
+                          'h-0 invisible opacity-0': heightOffSet >= 320 && pathname === '/',
+                          '!h-max !visible !opacity-100': mouseHover,
+                        })}>
+                {categoriesData && Array.isArray(categoriesData) && categoriesData.map(
+                  (ele: IMainCategory, index: number) => {
                     return (
                       <li key={index} className={clsx(styles.mainCategoryItem)}>
                         <Image
@@ -111,7 +126,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                         {/* print sub category */}
                         <ul className={clsx(styles.subCategoryBox)}>
                           {ele.subcategories.map(
-                            (subCategory: SubCategoryType, key: number) => {
+                            (subCategory: ISubCategory, key: number) => {
                               return (
                                 <li
                                   className={clsx(styles.subCategoryItem)}
@@ -137,15 +152,15 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
             </li>
 
             {/* menu link */}
-            {menuData?.data?.navlink?.map(
-              (menu: NavLinkType, index: number) => {
+            {menuData && menuData?.navlink?.map(
+              (menu: IMainNavLink, index: number) => {
                 return (
                   <li className={clsx(styles.mainMenuItem)} key={index}>
                     <MenuLink link={menu?.url} content={menu.tenNavLink} />
                     {menu.subLink.length > 0 && (
                       <ul className={clsx(styles.subContentBox, 'z-50')}>
                         {menu?.subLink?.map(
-                          (subMenu: ChildSubLinkType, i: number) => {
+                          (subMenu: ISubNavLink, i: number) => {
                             return (
                               <li className={clsx(styles.subMenuItem)} key={i}>
                                 <MenuLink
@@ -221,8 +236,8 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           Danh Mục Sản Phẩm
                         </h4>
                       </div>
-                      {categoriesData.data.map(
-                        (ele: MainCategoryType, index: number) => {
+                      {categoriesData && Array.isArray(categoriesData) && categoriesData.map(
+                        (ele: IMainCategory, index: number) => {
                           return (
                             <li
                               onClick={() =>
@@ -263,7 +278,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                               {openSubCategory.includes(ele.maDanhMucChinh) && (
                                 <ul>
                                   {ele.subcategories.map(
-                                    (sub: SubCategoryType, i: React.Key) => {
+                                    (sub: ISubCategory, i: React.Key) => {
                                       return (
                                         <li
                                           key={i}
@@ -292,8 +307,8 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                   }
                 </li>
                 {/* menu */}
-                {menuData?.data?.navlink.map(
-                  (ele: NavLinkType, index: React.Key) => {
+                {menuData?.navlink.map(
+                  (ele: IMainNavLink, index: React.Key) => {
                     return (
                       <li
                         key={index}
@@ -327,7 +342,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           <ul>
                             {ele.subLink.length > 0 &&
                               ele.subLink.map(
-                                (subLink: ChildSubLinkType, i: React.Key) => {
+                                (subLink: ISubNavLink, i: React.Key) => {
                                   return (
                                     <li
                                       key={i}

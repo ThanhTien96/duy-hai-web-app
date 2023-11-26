@@ -3,18 +3,53 @@ import React from 'react';
 import IconGroup from './Partials/IconGroup';
 import clsx from 'clsx';
 import styles from './TitleSection.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import { ISubCategory } from '@/@types/global';
 
 type TitleSectionProps = {
-  title?: string;
-  childTitle?: any[];
+  title?: React.ReactNode;
+  childTitle?: ISubCategory[];
   activeTitle?: string;
 };
 
-const TitleSection = ({ title, childTitle, activeTitle }: TitleSectionProps) => {
-  
+const TitleSection = ({
+  title,
+  childTitle,
+  activeTitle,
+}: TitleSectionProps) => {
+  const slidePropsTop = {
+    options: {
+      type: 'loop',
+      arrows: false,
+      drag: true,
+      pagination: false,
+      direction: 'ltr',
+      perPage: 8,
+      width: "100%",
+      gap: '1rem',
+      breakpoints: {
+        640: {
+          perPage: 3,
+          gap: "1rem",
+        },
+      },
+      autoScroll: {
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        rewind: true,
+        speed: 0.8,
+      },
+      lazyLoad: true,
+      reducedMotion: {
+        speed: 1,
+        rewindSpeed: 0,
+        autoplay: true,
+      },
+    },
+    extensions: { AutoScroll },
+  };
   return (
     <div className={clsx(styles.titleSection, 'block lg:flex pb-8')}>
       {/* top content */}
@@ -25,7 +60,7 @@ const TitleSection = ({ title, childTitle, activeTitle }: TitleSectionProps) => 
         )}
       >
         <IconGroup />
-        <h1 className="text-[18px] font-semibold text-white">{title}</h1>
+        <h1 className="text-[18px] font-semibold text-white capitalize">{title}</h1>
       </div>
 
       {/* bottom content */}
@@ -35,51 +70,42 @@ const TitleSection = ({ title, childTitle, activeTitle }: TitleSectionProps) => 
           'w-full lg:w-9/12 h-[45px] flex items-center',
         )}
       >
-        {/* map sub title */}
-        {
-          <Swiper
-          spaceBetween={10}
-            onSlideChange={() => console.log('slide change')}
-            autoplay={true}
-            navigation={true}
-            pagination={{
-              clickable: true,
-            }}
-            breakpoints={{
-              325: {
-                slidesPerView: 3,
-              },
-              768: {
-                slidesPerView: 4,
-              },
-              1024: {
-                slidesPerView:
-                  childTitle && childTitle.length + 1 >= 8 ? 8 : childTitle?.length,
-              },
-            }}
-            modules={[EffectFade, Navigation, Pagination]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-                  <span className={clsx("hover:text-app-500 hover:font-semibold cursor-pointer transition-all duration-200", {
-                    'text-app-500 font-semibold': !activeTitle || activeTitle.length <= 0 
-                  })}>
-                    Tất cả
-                  </span>
-                </SwiperSlide>
-            {childTitle?.map((ele: any, index: number) => {
+        {childTitle && childTitle.length > 0 && <Splide {...slidePropsTop} aria-label="My Favorite Images">
+          <SplideSlide>
+            <span
+              className={clsx(
+                'hover:text-app-500 hover:font-semibold cursor-pointer transition-all duration-200',
+                {
+                  'text-app-500 font-semibold':
+                    !activeTitle || activeTitle.length <= 0,
+                },
+              )}
+            >
+              Tất cả
+            </span>
+          </SplideSlide>
+
+          {childTitle &&
+            Array.isArray(childTitle) &&
+            childTitle.length > 0 &&
+            childTitle.map((ele: ISubCategory) => {
               return (
-                <SwiperSlide key={index}>
-                  <span className={clsx("hover:text-app-500 hover:font-semibold cursor-pointer transition-all duration-200", {
-                    'text-app-500 font-semibold': activeTitle && activeTitle.includes(ele.maDanhMucNho)
-                  })}>
+                <SplideSlide key={ele.maDanhMucNho}>
+                  <span
+                    className={clsx(
+                      'hover:text-app-500 hover:font-semibold cursor-pointer transition-all duration-200',
+                      {
+                        'text-app-500 font-semibold':
+                          activeTitle && activeTitle.includes(ele.maDanhMucNho),
+                      },
+                    )}
+                  >
                     {ele.tenDanhMucNho}
                   </span>
-                </SwiperSlide>
+                </SplideSlide>
               );
             })}
-          </Swiper>
-        }
+        </Splide>}
       </div>
     </div>
   );

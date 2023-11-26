@@ -1,1 +1,1 @@
-export {default as layoutRequester} from './layoutRequester';
+export { PageService } from './page.service'

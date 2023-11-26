@@ -15,7 +15,7 @@ const MenuLink = ({link, content}: MenuLinkProps) => {
 
   return (
     <Link 
-    className={clsx('text-white capitalize xl:text-[18px] lg:text-[14px]', {
+    className={clsx('text-white capitalize xl:text-[14px] lg:text-[14px]', {
       '!text-menu-active': link === activeSegment || (link === '/' && !activeSegment)
     })}
     href={link || ''}>{content}</Link>
