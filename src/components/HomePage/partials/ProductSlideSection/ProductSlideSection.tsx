@@ -25,7 +25,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
       arrows: false,
       drag: true,
       pagination: false,
-      direction: 'ltr',
+      direction: 'rtl',
       perPage: 4,
       gap: '1rem',
       focus: 0.5,
@@ -51,37 +51,37 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
     extensions:{ AutoScroll }
   };
 
-  const slidePropsBottom = {
-    options: {
-        type: 'loop',
-        arrows: false,
-        drag: true,
-        pagination: false,
-        direction: 'rtl',
-        perPage: 4,
-        gap: '1rem',
-        focus: 0.5,
-        breakpoints: {
-          640: {
-            perPage: 2,
-          },
-        },
-        autoScroll: {
-          pauseOnFocus: true,
-          pauseOnHover: true,
-          rewind: true,
-          speed: 1,
-      },
-      lazyLoad: true,
-      reducedMotion: {
-          speed: 1,
-          rewindSpeed: 0,
-          autoplay: true,
-        },
+  // const slidePropsBottom = {
+  //   options: {
+  //       type: 'loop',
+  //       arrows: false,
+  //       drag: true,
+  //       pagination: false,
+  //       direction: 'rtl',
+  //       perPage: 4,
+  //       gap: '1rem',
+  //       focus: 0.5,
+  //       breakpoints: {
+  //         640: {
+  //           perPage: 2,
+  //         },
+  //       },
+  //       autoScroll: {
+  //         pauseOnFocus: true,
+  //         pauseOnHover: true,
+  //         rewind: true,
+  //         speed: 1,
+  //     },
+  //     lazyLoad: true,
+  //     reducedMotion: {
+  //         speed: 1,
+  //         rewindSpeed: 0,
+  //         autoplay: true,
+  //       },
   
-      },
-      extensions:{ AutoScroll }
-  }
+  //     },
+  //     extensions:{ AutoScroll }
+  // }
 
   return (
     <div>
@@ -93,10 +93,6 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
         {productList &&
           Array.isArray(productList) &&
           productList
-            .filter(
-              (item: IProduct) =>
-                item.danhMucNho.maDanhMucChinh === PRODUCT_ID.saw,
-            )
             .map((ele: IProduct) => {
               return (
                 <SplideSlide key={ele.maSanPham}>
@@ -111,8 +107,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
             })}
       </Splide>
 
-      <div className="mt-8">
-        {/* bottom */}
+      {/* <div className="mt-8">
         <Splide 
         {...slidePropsBottom} aria-label="My Favorite Images">
           {productList &&
@@ -133,7 +128,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
                 </SplideSlide>
               ))}
         </Splide>
-      </div>
+      </div> */}
     </div>
   );
 };

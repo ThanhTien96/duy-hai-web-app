@@ -17,7 +17,7 @@ export async function getData() {
   const banner = await PageService.fetchBanner();
   const youtube = await PageService.fetchYoutubePost();
   const hotProduct = await PageService.fetchAllProduct({ hot: true });
-  const mainCategories = await PageService.fetchMainCategory();
+  const mainCategories = await PageService.fetchMainCategory({withProduct: true});
   // const specialProduct = await
   return {
     banner: banner.data.data,

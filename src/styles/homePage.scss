@@ -36,3 +36,19 @@
 :where(.css-dev-only-do-not-override-17a39f8).ant-form-item .ant-form-item-label >label{
     color: white !important;
 }
+
+// custom title section slide arrow
+.product-section-title{
+    .splide__arrow{
+        height: 2.6rem;
+        width: 1.5rem;
+        border-radius: 0;
+        background-color: transparent;
+    }
+    .splide__arrow.splide__arrow--next {
+        right: -1%;
+    }
+    .splide__arrow.splide__arrow--prev{
+        left: -3%;
+    }
+}

@@ -1,11 +1,14 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { ProductCard } from '@/components/global';
 import TitleSection from '@/components/global/TitleSection';
 import { IProduct } from '@/@types/product';
-import { IMainCategory, ISubCategory } from '@/@types/global';
+import { ISubCategory } from '@/@types/global';
 import { Empty } from 'antd';
-
-
+import { EMPTY_IMAGE } from '@/constants';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 export type ProductSectionProps = {
   data?: IProduct[];
@@ -13,31 +16,71 @@ export type ProductSectionProps = {
   subCategories?: ISubCategory[];
 };
 
-const ProductSection = ({ data, title, subCategories }: ProductSectionProps) => {
+const ProductSection = ({
+  data,
+  title,
+  subCategories,
+}: ProductSectionProps) => {
+  const [productList, setProductList] = useState<IProduct[]>([]);
+  const [type, setType] = useState<string>();
+
+  useEffect(() => {
+    subCategories?.forEach((ele: ISubCategory) =>
+      ele.danhSachSanPham?.map((prod: IProduct) =>
+        setProductList((current) => [...current, prod]),
+      ),
+    ) ?? [];
+  }, []);
+  const slideProps = {
+    options: {
+      type: 'loop',
+      arrows: true,
+      drag: true,
+      pagination: false,
+      perPage: 4,
+      width: '100%',
+      gap: '1rem',
+      breakpoints: {
+        640: {
+          perPage: 2,
+          gap: '1rem',
+        },
+      },
+    },
+  };
+
   return (
     <div>
       {/* Z */}
-      <TitleSection childTitle={subCategories} title={title} />
-      <div className="grid grid-cols-12 max-xs:gap-2 md:gap-4 lg:gap-8">
-        {/* map products */}
-        {data && Array.isArray(data) && data.length > 0 ?
-          data.map((ele: any) => {
-            return (
-              <div
-                key={ele.maSanPham}
-                className="max-xs:col-span-6 md:col-span-4 lg:col-span-3"
-              >
-                <ProductCard
-                  title={ele.tenSanPham}
-                  discountPrice={ele.giaGiam}
-                  price={ele.giaGoc}
-                  image={ele?.hinhAnh[0]?.hinhAnh}
-                />
-              </div>
-            );
-          })
-          : (<div className='col-span-12'><Empty description="Không Có Sản Phẩm" /></div>)
-        }
+      <TitleSection handleChooseType={(type) => setType(type)} childTitle={subCategories} title={title} />
+      <div>
+        <Splide {...slideProps}>
+          {/* map products */}
+          {productList &&
+          Array.isArray(productList) &&
+          productList.length > 0 ? (
+            productList.map((ele: IProduct, idx: number) => {
+              return (
+                <SplideSlide key={ele.maSanPham + idx}>
+                    <ProductCard
+                      title={ele?.tenSanPham}
+                      discountPrice={ele?.giaGiam}
+                      price={ele?.giaGoc}
+                      image={
+                        ele.hinhAnh && Array.isArray(ele.hinhAnh)
+                          ? ele?.hinhAnh[0]?.hinhAnh
+                          : EMPTY_IMAGE
+                      }
+                    />
+                </SplideSlide>
+              );
+            })
+          ) : (
+            <div className="col-span-12">
+              <Empty description="Không Có Sản Phẩm" />
+            </div>
+          )}
+        </Splide>
       </div>
     </div>
   );

@@ -18,10 +18,13 @@ class PageService {
     }
 
     // main category
-    static async fetchMainCategory() {
+    static async fetchMainCategory(withProduct?: {withProduct: boolean}) {
         return await http({
             url: apiPaths.mainCategory,
             method: "GET",
+            params: {
+                withProduct: withProduct?.withProduct
+            }
         })
     }
 

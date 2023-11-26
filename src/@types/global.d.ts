@@ -1,8 +1,12 @@
+import { IProduct } from "./product";
+
 export interface ISubCategory {
   readonly maDanhMucNho: string;
   tenDanhMucNho: string;
   icon: string;
   readonly maDanhMucChinh: string;
+  danhSachSanPham?: IProduct[]
+
 }
 
 export interface IMainCategory {
