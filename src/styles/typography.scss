@@ -1,0 +1,58 @@
+@import './variable';
+@import './mixin';
+
+// / HEADING / 
+.heading1 {
+  @include text-mixin($size-h1, $weight-7, $leading-120);
+  font-family: var(--font-ubuntu) !important;
+}
+
+.heading2 {
+  @include text-mixin($size-h2, $weight-7, $leading-120);
+  font-family: $font-ubuntu;
+}
+
+.heading3 {
+  @include text-mixin($size-h3, $weight-7, $leading-120);
+  font-family: $font-ubuntu;
+}
+
+.heading4 {
+  @include text-mixin($size-h4, $weight-7, $leading-144);
+  font-family: $font-nunito;
+}
+
+.heading5 {
+  @include text-mixin($size-h5, $weight-7, $leading-144);
+  font-family: $font-nunito;
+}
+
+.heading6 {
+  @include text-mixin($size-h6, $weight-7, $leading-144);
+  font-family: $font-nunito;
+}
+
+// / TEXT_BODY / 
+.text-large {
+  @include text-mixin($size-large, $weight-4, $leading-144);
+  font-family: $font-nunito;
+}
+
+.text-regular {
+  @include text-mixin($size-regular, $weight-4, $leading-144);
+  font-family: $font-nunito;
+}
+
+.text-small {
+  @include text-mixin($size-small, $weight-4, $leading-144);
+  font-family: $font-nunito;
+}
+
+.sub-title {
+  @include text-mixin($size-small, $weight-7, $leading-144);
+  color: $c-accent-500;
+  font-family: $font-nunito;
+  font-style: normal;
+  letter-spacing: 3.36px;
+  text-transform: uppercase;
+}

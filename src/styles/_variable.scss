@@ -7,3 +7,82 @@ $app-black: #100f0f;
 $app-black-300: #38383866;
 $category-box: #f2f2f2;
 $red-500: rgb(255, 9, 9);
+
+
+$size-small: calc(11.6px + 0.125vw); //14px
+$size-regular: calc(13.6px + 0.125vw); //16px
+$size-large: calc(15.6px + 0.125vw); //18px
+$size-h6: calc(19.6px + 0.125vw);
+$size-h5: calc(23.6px + 0.125vw);
+$size-h4: calc(27.2px + 0.25vw);
+$size-h3: calc(28.4px + 0.5vw);
+$size-h2: calc(29.2px + 0.875vw);
+$size-h1: calc(26.4px + 2.375vw); /*34 (320) - 72 (1920)*/
+
+/** FONT-WEIGHT VARIABLE **/
+$weight-1: 100;
+$weight-2: 200;
+$weight-3: 300;
+$weight-4: 400;
+$weight-5: 500;
+$weight-6: 600;
+$weight-7: 700;
+$weight-8: 800;
+$weight-9: 900;
+
+/** Line Height variable **/
+$leading-120: 120%;
+$leading-144: 144%;
+
+/** SPACING **/
+$spacing-1: calc(3.2px + 0.25vw); //8-4 (px)
+$spacing-2: calc(6.4px + 0.5vw); //16-8 (px)
+$spacing-3: calc(14.4px + 0.5vw); //24-16 (px)
+$spacing-4: calc(12.8px + 1vw); //32-16 (px)
+$spacing-5: calc(25.6px + 2vw); // 64-32 (px)
+$spacing-6: calc(28.8px + 2.25vw); //72-36 px
+$spacing-7: calc(57.6px + 4.5vw); //144-72 (px)
+$spacing-8: calc(-28.8px + 14vw); // 240 - 16 px
+$spacing-9: calc(-52.8px + 21.5vw); //360-16 (px)
+
+/** APP_COLOR **/
+$c-primary-200: #bfe5f8;
+$c-primary-500: #27a9e1;
+$c-primary-600: #1181b8;
+$c-primary-700: #0f6795;
+$c-accent-200: #ffc7c9;
+$c-accent-500: #ff5a5f;
+$c-accent-600: #f83b41;
+$c-accent-700: #e51d23;
+$c-turquoise-surf-5: #01b2d0;
+$c-munsell: #048ba8;
+$c-celadon-blue: #0075a9;
+$c-beer: #f7931d;
+$c-desire: #ea4454;
+$c-crayola: #6d7fd0;
+$c-gd-1: linear-gradient(324deg, #27a9e1 16.42%, #548fda 83.42%);
+$c-gd-2: linear-gradient(to bottom right, #6d7fd0 0%, #4995dd 50%);
+
+/** LIGHT **/
+$c-bg-light-1: #fafffd;
+$c-bg-light-2: #f5f7fa;
+$c-bg-light-3: #edf9fd;
+$c-text-light-1: #fafffd;
+$c-text-light-2: #e0e0e0;
+
+/** DARK **/
+$c-text-dark-1: #0e1c36;
+$c-text-dark-2: #172a3a;
+$c-text-dark-3: #31435a;
+$c-bg-dark-1: #2f2f2f;
+
+/** FONT FAMILY **/
+$font-ubuntu: var(--font-ubuntu), sans-serif;
+$font-nunito: var(--font-nunito-Sans), sans-serif;
+
+/** BREAKPOINTS **/
+$xs-breakpoints: 425.98px;
+$sm-breakpoints: 640.98px;
+$md-breakpoints: 768.98px;
+$lg-breakpoints: 1024.98px;
+$xl-breakpoints: 1280.98px;

@@ -1,26 +1,73 @@
-.image-container {
-    position: relative;
-    cursor: zoom-in;
+
+
+.media-list {
+  .parent-div{
+    .image-container {
+      position: relative;
+      cursor: zoom-in;
+    }
+    
+    .base-image {
+      width: 90%;
+      height: auto;
+      transition: filter 0.3s ease-in-out;
+    }
+    
+    
+    .tooltip {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.582); 
+      border: 1px solid #cccccc;
+      padding: 100px;
+      display: none;
+      pointer-events: none; 
+    
+    }
+    
+    .image-container:hover .tooltip {
+      display: block; 
+    }
+  
+    &:hover .zoom-in-container{
+      display: block;
+    }
+  
+    
+  
+    @media screen and (max-width: 425px){
+      .zoom-in-container{
+        display: none;
+      }
+      &:hover .zoom-in-container{
+        display: none;
+      }
+      .tooltip {
+        display: none;
+      }
+      .image-container:hover .tooltip {
+        display: none; 
+      }
+    }
+    
   }
-  
-  .base-image {
-    width: 100%;
-    height: auto;
-    transition: filter 0.3s ease-in-out;
+
+  .splide__arrow{
+    height: 100%;
+    width: 20px;
+    background-color: rgba(0, 0, 0, 0.521);
+    border-radius: 0;
+    svg{
+      fill: white;
+    }
   }
-  
-  
-  .tooltip {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.582); 
-    border: 1px solid #cccccc;
-    padding: 50px;
-    display: none;
-    pointer-events: none; 
-  
+  .splide__arrow--next{
+    right: 0;
   }
-  
-  .image-container:hover .tooltip {
-    display: block; 
+  .splide__arrow--prev{
+    left: 0;
   }
+}
+
+
+
 

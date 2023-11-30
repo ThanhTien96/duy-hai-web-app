@@ -7,7 +7,7 @@ import { PageService } from '@/services';
 import { IMainCategory, IMenu } from '@/@types/global';
 import StoreProvider from '@/components/shared/StoreProvider';
 import Footer from '@/components/global/Footer';
-
+import { FONT_UBUNTU, FONT_NUNITO_SANS} from '@/font/font'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -42,7 +42,7 @@ export default async function RootLayout({
       </head>
       <body
         suppressHydrationWarning={true}
-        className={clsx(inter.className, 'relative')}
+        className={clsx( FONT_UBUNTU.className, 'relative')}
       >
         <StoreProvider>
           <header className="fixed top-0 left-0 right-0 z-50 bg-white">

@@ -3,33 +3,41 @@ import {
   ProcductsSection,
   ProductSlideSection,
 } from '@/components/HomePage';
+import clsx from 'clsx';
 import { Wrapper } from '@/components/shared';
 import '../../styles/homePage.scss';
-import clsx from 'clsx';
 import NewsSection from '@/components/HomePage/partials/NewsSection';
 import ContactSection from '@/components/HomePage/partials/ContactSection';
 import { PageService } from '@/services';
-import { IBanner, IYoutubePost } from '@/@types/home';
-import { IMainCategory } from '@/@types/global';
+import { IMainCategory, IPagination } from '@/@types/global';
 import { PRODUCT_ID } from '@/constants';
+import { IBanner, IYoutubePost } from '@/@types/home';
+import { IProduct } from '@/@types/product';
+import { INews } from '@/@types/news';
 
-export async function getData() {
+
+async function getData():Promise<{
+  banner: IBanner[];
+  youtube: IYoutubePost[];
+  hotProduct: IProduct[];
+  mainCategories: IMainCategory[];
+  newsList: {data: INews[]} & IPagination
+}> {
   const banner = await PageService.fetchBanner();
   const youtube = await PageService.fetchYoutubePost();
   const hotProduct = await PageService.fetchAllProduct({ hot: true });
   const mainCategories = await PageService.fetchMainCategory({withProduct: true});
   const newsList = await PageService.fetchAllNews({page: 1, perPage: 7});
-  // const specialProduct = await
+
   return {
-    banner: banner.data.data,
-    youtube: youtube.data.data,
-    hotProduct: hotProduct.data.data,
-    mainCategories: mainCategories.data.data,
-    newsList: newsList.data
-  };
+    banner: banner?.data?.data,
+    youtube: youtube?.data?.data,
+    hotProduct: hotProduct?.data?.data,
+    mainCategories: mainCategories?.data?.data,
+    newsList: newsList?.data
+  } as any
 }
 
-export const revalidate = 60;
 
 export default async function Home(props: any) {
   const data = await getData();
@@ -38,14 +46,14 @@ export default async function Home(props: any) {
     <div>
       {/* hero section */}
       <Wrapper className="!pt-2">
-        <BannerSection youtubePost={data.youtube} banner={data?.banner} />
+        <BannerSection youtubePost={data?.youtube} banner={data?.banner} />
       </Wrapper>
       {/* special section */}
       <div className={clsx('specialSection')}>
         <Wrapper>
           <ProductSlideSection
             title={'Sản phẩm bán chạy'}
-            data={data.hotProduct}
+            data={data?.hotProduct}
           />
         </Wrapper>
       </div>
