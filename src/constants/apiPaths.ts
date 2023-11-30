@@ -5,5 +5,7 @@ export const apiPaths = {
     mainCategory: "/layDanhMuc",
     menu: "/menu",
     product: "/layDanhSachSanPham",
-    productIncludeSubCategories: "/laySanPhamTheoDanhMucNho"
+    productIncludeSubCategories: "/laySanPhamTheoDanhMucNho",
+    productDetail: "/layChiTietSanPham",
+    news: "/layTinTucPhanTrang",
 }

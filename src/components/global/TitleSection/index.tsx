@@ -38,7 +38,7 @@ const TitleSection = ({
           gap: '1rem',
         },
         320: {
-          perPage: childTitle && childTitle.length <= 3 ? childTitle.length : 3,
+          perPage: childTitle && childTitle.length <= 3 ? childTitle.length : 3  ,
           gap: '1rem',
         },
       },

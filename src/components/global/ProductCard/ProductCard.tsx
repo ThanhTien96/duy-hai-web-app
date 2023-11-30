@@ -7,8 +7,10 @@ import styles from './ProductCard.module.scss';
 import clsx from 'clsx';
 import CartIcon from '@/libIcon/CartIcon';
 import calculator from '@/utils/calculator';
+import { useRouter } from 'next/navigation';
 
 type ProductCardProps = {
+  id?: string;
   image?: string;
   title?: string;
   discountPrice?: number;
@@ -17,13 +19,16 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({
+  id,
   image,
   title,
   discountPrice,
   price,
+  onClick
 }: ProductCardProps) => {
   return (
     <div
+      onClick={onClick}
       className={clsx(
         'border border-solid border-gray-border bg-white rounded-md',
         styles.cardItem,

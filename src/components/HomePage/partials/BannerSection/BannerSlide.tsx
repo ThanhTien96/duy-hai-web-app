@@ -16,7 +16,7 @@ const BannerSlide = ({ banner }: TBannerSlideProps) => {
   const slideProps = {
     options: {
       type: 'loop',
-      arrows: true,
+      arrows: false,
       drag: true,
       perPage: 1,
       autoplay: true,

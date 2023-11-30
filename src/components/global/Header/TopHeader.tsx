@@ -23,8 +23,8 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
       <Wrapper className="!py-4">
         <div className="flex justify-between items-center">
           {/* logo */}
-          <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
-            <Link href="#">
+          <div className="w-[60px] h-[60px] rounded-full overflow-hidden !cursor-pointer">
+            <Link className='' href="/">
               <Image
                 className="w-full h-full object-contain"
                 src={logo ?? EMPTY_IMAGE}

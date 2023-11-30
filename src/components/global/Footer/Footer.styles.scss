@@ -1,0 +1,24 @@
+@import '../../../styles/variable';
+
+.footer {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    background: url('../../../assets/footer/CNC-Banner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    color: $app-white;
+    &::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $app-color;
+        opacity: 0.8;
+        z-index: -1;
+    }
+}

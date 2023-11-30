@@ -101,14 +101,14 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                 styles.categoryItem,
               )}
             >
-              <h5 onMouseOver={() => setMouseHover(true)}  className={clsx("flex items-center xl:gap-8 lg:gap-2 cursor-pointer", styles.categoriesTitle)}>
+              <h5 onMouseOver={() => setMouseHover(true)}  className={clsx("flex items-center xl:gap-8 lg:gap-2 !cursor-pointer", styles.categoriesTitle)}>
                 {' '}
                 <UnorderedListOutlined className="lg-text-2xl" /> Tất Cả Sản
                 Phẩm
               </h5>
               {/* print main categories */}
               <ul className={clsx(styles.mainCategoryBox, 'transition-all duration-200', {
-                          'h-0 invisible opacity-0': heightOffSet >= 320 && pathname === '/',
+                          'h-0 invisible opacity-0': heightOffSet >= 320 || pathname !== '/',
                           '!h-max !visible !opacity-100': mouseHover,
                         })}>
                 {categoriesData && Array.isArray(categoriesData) && categoriesData.map(

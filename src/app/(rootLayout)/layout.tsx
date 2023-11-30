@@ -1,4 +1,4 @@
-import '../globals.css';
+import '../../styles/globals.scss'
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import clsx from 'clsx';
@@ -6,6 +6,8 @@ import { MainHeader, TopHeader } from '@/components/global';
 import { PageService } from '@/services';
 import { IMainCategory, IMenu } from '@/@types/global';
 import StoreProvider from '@/components/shared/StoreProvider';
+import Footer from '@/components/global/Footer';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +38,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="../logo.svg" type="image/x-icon" />
       </head>
       <body
         suppressHydrationWarning={true}
@@ -48,6 +50,7 @@ export default async function RootLayout({
             <MainHeader menuData={menu} categoriesData={categories} />
           </header>
           <div className="mt-[135px]">{children}</div>
+          <Footer categories={categories} />
         </StoreProvider>
       </body>
     </html>

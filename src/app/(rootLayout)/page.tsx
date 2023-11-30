@@ -18,12 +18,14 @@ export async function getData() {
   const youtube = await PageService.fetchYoutubePost();
   const hotProduct = await PageService.fetchAllProduct({ hot: true });
   const mainCategories = await PageService.fetchMainCategory({withProduct: true});
+  const newsList = await PageService.fetchAllNews({page: 1, perPage: 7});
   // const specialProduct = await
   return {
     banner: banner.data.data,
     youtube: youtube.data.data,
     hotProduct: hotProduct.data.data,
     mainCategories: mainCategories.data.data,
+    newsList: newsList.data
   };
 }
 
@@ -50,20 +52,20 @@ export default async function Home(props: any) {
 
       {/* map product section */}
       {/* lawn mawer section */}
-      {data.mainCategories &&
+      {data && data.mainCategories &&
         Array.isArray(data.mainCategories) &&
-        data.mainCategories.map((ele: IMainCategory) => {
+        data?.mainCategories?.map((ele: IMainCategory) => {
           if (ele.maDanhMucChinh === PRODUCT_ID.saw || ele.maDanhMucChinh === PRODUCT_ID.lawnMower) {
             return (
-              <Wrapper key={ele.maDanhMucChinh}>
-                <ProcductsSection subCategories={ele.subcategories} title={ele.tenDanhMuc} />
+              <Wrapper key={ele?.maDanhMucChinh}>
+                <ProcductsSection subCategories={ele?.subcategories} title={ele?.tenDanhMuc} />
               </Wrapper>
             );
           }
         })}
       {/* news section */}
       <Wrapper>
-        <NewsSection />
+        <NewsSection newsList={data?.newsList} />
       </Wrapper>
       {/* contact section */}
       <div className="contact_section">

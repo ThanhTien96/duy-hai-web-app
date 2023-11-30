@@ -1,54 +1,84 @@
-.specialSection{
+@import './variable';
 
-    background: url('../assets/homeImage/specialSection.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-attachment: fixed;
-    box-shadow: rgba(255, 255, 255, 0.88) 0px 30px 60px -12px inset, rgba(255, 254, 254, 0.806) 0px 18px 36px -18px inset;
-    position: relative;
-   z-index: 1;
-    &::after{
-        content: '';
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(255, 255, 255, 0.686);
-        position: absolute;
-        z-index: -1;
-    }
+.specialSection {
+  background: url('../assets/homeImage/specialSection.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  box-shadow: rgba(255, 255, 255, 0.88) 0px 30px 60px -12px inset,
+    rgba(255, 254, 254, 0.806) 0px 18px 36px -18px inset;
+  position: relative;
+  z-index: 1;
+  &::after {
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.686);
+    position: absolute;
+    z-index: -1;
+  }
 }
 
-.contact_section{
-    width: 100%;
-    background-image: url('../assets/contact/bg_nhantin.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-
+.contact_section {
+  width: 100%;
+  background-image: url('../assets/contact/bg_nhantin.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-:where(.css-dev-only-do-not-override-17a39f8).ant-form-large .ant-form-item .ant-form-item-label>label{
-    height: auto;
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-large
+  .ant-form-item
+  .ant-form-item-label
+  > label {
+  height: auto;
 }
 
-:where(.css-dev-only-do-not-override-17a39f8).ant-form-item .ant-form-item-label >label{
-    color: white !important;
+:where(.css-dev-only-do-not-override-17a39f8).ant-form-item
+  .ant-form-item-label
+  > label {
+  color: white !important;
 }
 
 // custom title section slide arrow
-.product-section-title{
-    .splide__arrow{
-        height: 2.6rem;
-        width: 1.5rem;
-        border-radius: 0;
-        background-color: transparent;
-    }
-    .splide__arrow.splide__arrow--next {
-        right: -1%;
-    }
-    .splide__arrow.splide__arrow--prev{
-        left: -3%;
-    }
+.product-section-title {
+  .splide__arrow {
+    height: 2.6rem;
+    width: 1.5rem;
+    border-radius: 0;
+    background-color: transparent;
+  }
+  .splide__arrow.splide__arrow--next {
+    right: -1%;
+  }
+  .splide__arrow.splide__arrow--prev {
+    left: -3%;
+  }
 }
+
+//  custom banner pagination slider
+.splide__pagination__page {
+  width: 20px;
+  height: 4px;
+  border-radius: 0;
+  transition: all 0.5s;
+}
+
+.splide__pagination__page.is-active {
+  width: 40px;
+  height: 4px;
+  background: $orange-600;
+  opacity: 1;
+}
+
+// .splide__arrow {
+//   height: 100%;
+//   width: 20px;
+//   border-radius: 0;
+//   background-color: rgba(0, 0, 0, 0.226);
+//   svg {
+//     fill: white;
+//   }
+// }

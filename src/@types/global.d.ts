@@ -1,5 +1,18 @@
 import { IProduct } from "./product";
 
+export interface IMediaBase {
+  readonly id: string;
+  hinhAnh: string;
+  maTinTuc: string;
+}
+
+export interface IPagination {
+  currentPage: number;
+  total: number;
+  totalPage: number;
+}
+
+
 export interface ISubCategory {
   readonly maDanhMucNho: string;
   tenDanhMucNho: string;

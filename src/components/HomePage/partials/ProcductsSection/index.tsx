@@ -9,6 +9,7 @@ import { Empty } from 'antd';
 import { EMPTY_IMAGE } from '@/constants';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { useRouter } from 'next/navigation';
 
 export type ProductSectionProps = {
   data?: IProduct[];
@@ -22,7 +23,7 @@ const ProductSection = ({
   subCategories,
 }: ProductSectionProps) => {
   const [productList, setProductList] = useState<IProduct[]>([]);
-  const [type, setType] = useState<string>();
+  const router = useRouter();
 
   useEffect(() => {
     subCategories?.forEach((ele: ISubCategory) =>
@@ -52,35 +53,38 @@ const ProductSection = ({
   return (
     <div>
       {/* Z */}
-      <TitleSection handleChooseType={(type) => setType(type)} childTitle={subCategories} title={title} />
+      <TitleSection
+        childTitle={subCategories}
+        title={title}
+      />
       <div>
-        <Splide {...slideProps}>
-          {/* map products */}
-          {productList &&
-          Array.isArray(productList) &&
-          productList.length > 0 ? (
-            productList.map((ele: IProduct, idx: number) => {
+        {/* map products */}
+        {productList && Array.isArray(productList) && productList.length > 0 ? (
+          <Splide {...slideProps}>
+            {productList.map((ele: IProduct, idx: number) => {
               return (
                 <SplideSlide key={ele.maSanPham + idx}>
-                    <ProductCard
-                      title={ele?.tenSanPham}
-                      discountPrice={ele?.giaGiam}
-                      price={ele?.giaGoc}
-                      image={
-                        ele.hinhAnh && Array.isArray(ele.hinhAnh)
-                          ? ele?.hinhAnh[0]?.hinhAnh
-                          : EMPTY_IMAGE
-                      }
-                    />
+                  <ProductCard
+                    onClick={() => router.push(ele.maSanPham)}
+                    id={ele.maSanPham}
+                    title={ele?.tenSanPham}
+                    discountPrice={ele?.giaGiam}
+                    price={ele?.giaGoc}
+                    image={
+                      ele.hinhAnh && Array.isArray(ele.hinhAnh)
+                        ? ele?.hinhAnh[0]?.hinhAnh
+                        : EMPTY_IMAGE
+                    }
+                  />
                 </SplideSlide>
               );
-            })
-          ) : (
-            <div className="col-span-12">
-              <Empty description="Không Có Sản Phẩm" />
-            </div>
-          )}
-        </Splide>
+            })}
+          </Splide>
+        ) : (
+          <div className="col-span-12">
+            <Empty description="Không Có Sản Phẩm" />
+          </div>
+        )}
       </div>
     </div>
   );

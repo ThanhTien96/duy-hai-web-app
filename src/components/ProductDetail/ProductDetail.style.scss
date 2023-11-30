@@ -1,0 +1,26 @@
+.image-container {
+    position: relative;
+    cursor: zoom-in;
+  }
+  
+  .base-image {
+    width: 100%;
+    height: auto;
+    transition: filter 0.3s ease-in-out;
+  }
+  
+  
+  .tooltip {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.582); 
+    border: 1px solid #cccccc;
+    padding: 50px;
+    display: none;
+    pointer-events: none; 
+  
+  }
+  
+  .image-container:hover .tooltip {
+    display: block; 
+  }
+

@@ -1,4 +1,4 @@
-import { apiPaths } from "@/constants";
+import { PAGE_SIZE, apiPaths } from "@/constants";
 import { http } from "@/http";
 
 class PageService {
@@ -43,6 +43,29 @@ class PageService {
             method: 'GET',
             params: {
                 filter
+            }
+        })
+    }
+
+    // product detail
+    static async fetchProductDetail(id: string) {
+        return await http({
+            url: apiPaths.productDetail,
+            method: "GET",
+            params: {
+                maSanPham: id
+            }
+        })
+    }
+
+    // news
+    static async fetchAllNews({page, perPage = PAGE_SIZE.news}: {page: number, perPage: number}){
+        return await http({
+            url: apiPaths.news,
+            method: "GET",
+            params: {
+                page,
+                perPage
             }
         })
     }
