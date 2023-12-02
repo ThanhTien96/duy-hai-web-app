@@ -1,10 +1,16 @@
 import React from 'react'
+import rehypeRaw from "rehype-raw";
+import Markdown from 'react-markdown';
+import clsx from 'clsx';
+import './Markdown.style.scss'
+type TMarkdownXProps = {
+  content?: string;
+  className?: string;
+}
 
-type Props = {}
-
-const MarkdownX = (props: Props) => {
+const MarkdownX = ({content, className}: TMarkdownXProps) => {
   return (
-    <div>MarkdownX</div>
+    <Markdown className={clsx(className, "mark-down-container")} rehypePlugins={[rehypeRaw]}>{content}</Markdown>
   )
 }
 

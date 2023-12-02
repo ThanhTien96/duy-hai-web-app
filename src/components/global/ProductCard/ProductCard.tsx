@@ -16,6 +16,7 @@ type ProductCardProps = {
   discountPrice?: number;
   price?: number;
   onClick?: () => void;
+  className?: string;
 };
 
 const ProductCard = ({
@@ -24,12 +25,13 @@ const ProductCard = ({
   title,
   discountPrice,
   price,
-  onClick
+  onClick,
+  className
 }: ProductCardProps) => {
   return (
     <div
       onClick={onClick}
-      className={clsx(
+      className={clsx(className,
         'border border-solid border-gray-border bg-white rounded-md',
         styles.cardItem,
       )}

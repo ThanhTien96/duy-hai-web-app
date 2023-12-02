@@ -1,0 +1,12 @@
+{
+    "productList": {
+        "title": "Sản Phẩm Cùng Loại"
+    },
+    "detailMarkdown": "Chi Tiết Sản Phẩm:",
+    "contentDetail": {
+        "thuonHieu": "Thương Hiệu",
+        "tinhTrang": "Tình Trạng",
+        "soLuong": "Số Lượng",
+        "currency": "VNĐ"
+    }
+}

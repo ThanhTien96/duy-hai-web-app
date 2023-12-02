@@ -13,10 +13,15 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useState } from 'react';
-import { IMainCategory, IMainNavLink, IMenu, ISubCategory, ISubNavLink } from '@/@types/global';
+import {
+  IMainCategory,
+  IMainNavLink,
+  IMenu,
+  ISubCategory,
+  ISubNavLink,
+} from '@/@types/global';
 import useScroll from '@/hooks/useScroll';
-import { usePathname } from 'next/navigation';
-
+import { usePathname, useRouter } from 'next/navigation';
 
 type ChildSubLinkType = {
   id: string;
@@ -25,20 +30,20 @@ type ChildSubLinkType = {
   maNavLink: string;
 };
 
-export type NavLinkType =  {
+export type NavLinkType = {
   maNavLink: string;
   tenNavLink: string;
   url: string;
   maMenu: string;
   role: number;
   subLink: ChildSubLinkType[];
-}
+};
 
 export type MenuDataType = {
   maMenu: string;
   active: boolean;
   logo: string;
-  navlink:NavLinkType[];
+  navlink: NavLinkType[];
 };
 
 type MainHeaderProps = {
@@ -61,8 +66,8 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [heightOffSet] = useScroll();
   const [mouseHover, setMouseHover] = useState<boolean>(false);
-  const pathname = usePathname()
-
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleCloseAll = () => {
     setOpenCategory(false);
@@ -70,8 +75,6 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
     setOpenSubCategory('');
     setOpenSubMenu('');
   };
-
-
 
   /** handle control sub menu */
   const handleOpenSubMenu = (id: string) => {
@@ -95,24 +98,39 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
           <ul className=" z-50 items-center max-xs:hidden sm:hidden xs:hidden md:hidden lg:flex">
             {/* categories */}
             <li
-            onMouseLeave={() => setMouseHover(false)}
+              onMouseLeave={() => setMouseHover(false)}
               className={clsx(
                 'xl:w-[300px] lg:w-[200px] text-white xl:text-[18px] lg:text-[14px] font-medium bg-black text-right',
                 styles.categoryItem,
               )}
             >
-              <h5 onMouseOver={() => setMouseHover(true)}  className={clsx("flex items-center xl:gap-8 lg:gap-2 !cursor-pointer", styles.categoriesTitle)}>
+              <h5
+                onClick={() => router.push('san-pham')}
+                onMouseOver={() => setMouseHover(true)}
+                className={clsx(
+                  'flex items-center xl:gap-8 lg:gap-2 !cursor-pointer',
+                  styles.categoriesTitle,
+                )}
+              >
                 {' '}
                 <UnorderedListOutlined className="lg-text-2xl" /> Tất Cả Sản
                 Phẩm
               </h5>
               {/* print main categories */}
-              <ul className={clsx(styles.mainCategoryBox, 'transition-all duration-200', {
-                          'h-0 invisible opacity-0': heightOffSet >= 320 || pathname !== '/',
-                          '!h-max !visible !opacity-100': mouseHover,
-                        })}>
-                {categoriesData && Array.isArray(categoriesData) && categoriesData.map(
-                  (ele: IMainCategory, index: number) => {
+              <ul
+                className={clsx(
+                  styles.mainCategoryBox,
+                  'transition-all duration-200',
+                  {
+                    'h-0 invisible opacity-0':
+                      heightOffSet >= 320 || pathname !== '/',
+                    '!h-max !visible !opacity-100': mouseHover,
+                  },
+                )}
+              >
+                {categoriesData &&
+                  Array.isArray(categoriesData) &&
+                  categoriesData.map((ele: IMainCategory, index: number) => {
                     return (
                       <li key={index} className={clsx(styles.mainCategoryItem)}>
                         <Image
@@ -146,14 +164,13 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                         </ul>
                       </li>
                     );
-                  },
-                )}
+                  })}
               </ul>
             </li>
 
             {/* menu link */}
-            {menuData && menuData?.navlink?.map(
-              (menu: IMainNavLink, index: number) => {
+            {menuData &&
+              menuData?.navlink?.map((menu: IMainNavLink, index: number) => {
                 return (
                   <li className={clsx(styles.mainMenuItem)} key={index}>
                     <MenuLink link={menu?.url} content={menu.tenNavLink} />
@@ -164,7 +181,9 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                             return (
                               <li className={clsx(styles.subMenuItem)} key={i}>
                                 <MenuLink
-                                  link={`${menu.url}?title=${(subMenu?.url).split('/')[1]}`}
+                                  link={`${menu.url}?title=${
+                                    (subMenu?.url).split('/')[1]
+                                  }`}
                                   content={subMenu?.tenSubLink}
                                 />
                               </li>
@@ -175,8 +194,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                     )}
                   </li>
                 );
-              },
-            )}
+              })}
           </ul>
 
           {/* mobile menu */}
@@ -236,73 +254,77 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           Danh Mục Sản Phẩm
                         </h4>
                       </div>
-                      {categoriesData && Array.isArray(categoriesData) && categoriesData.map(
-                        (ele: IMainCategory, index: number) => {
-                          return (
-                            <li
-                              onClick={() =>
-                                handleOpenSubCategory(ele.maDanhMucChinh)
-                              }
-                              className={clsx(
-                                'py-2 border-b border-solid border-white pl-8',
-                              )}
-                              key={index}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2 text-[16px] text-white capitalize">
-                                  <Image
-                                    src={ele.icon}
-                                    width={20}
-                                    height={20}
-                                    alt={ele.tenDanhMuc}
-                                  />
-                                  <span>{ele.tenDanhMuc}</span>
-                                </div>
-                                {ele.subcategories.length > 0 && (
-                                  <div className="relative">
-                                    <div className="absolute top-0 bottom-0 w-[1px] bg-white"></div>
-                                    <CaretDownFilled
-                                      className={clsx(
-                                        'text-white transition-all duration-300 px-6',
-                                        {
-                                          'rotate-180':
-                                            openSubCategory ===
-                                            ele.maDanhMucChinh,
-                                        },
-                                      )}
-                                    />
-                                  </div>
+                      {categoriesData &&
+                        Array.isArray(categoriesData) &&
+                        categoriesData.map(
+                          (ele: IMainCategory, index: number) => {
+                            return (
+                              <li
+                                onClick={() =>
+                                  handleOpenSubCategory(ele.maDanhMucChinh)
+                                }
+                                className={clsx(
+                                  'py-2 border-b border-solid border-white pl-8',
                                 )}
-                              </div>
-                              {/* sub categories */}
-                              {openSubCategory.includes(ele.maDanhMucChinh) && (
-                                <ul>
-                                  {ele.subcategories.map(
-                                    (sub: ISubCategory, i: React.Key) => {
-                                      return (
-                                        <li
-                                          key={i}
-                                          className={clsx(
-                                            'flex items-center gap-2 text-[16px] text-white capitalize border-t border-dotted border-white first-of-type:mt-2 py-2 last-of-type:pb-0 z-50',
-                                          )}
-                                        >
-                                          <Image
-                                            src={ele.icon}
-                                            width={20}
-                                            height={20}
-                                            alt={sub.tenDanhMucNho}
-                                          />
-                                          <span>{sub.tenDanhMucNho}</span>
-                                        </li>
-                                      );
-                                    },
+                                key={index}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2 text-[16px] text-white capitalize">
+                                    <Image
+                                      src={ele.icon}
+                                      width={20}
+                                      height={20}
+                                      alt={ele.tenDanhMuc}
+                                    />
+                                    <span>{ele.tenDanhMuc}</span>
+                                  </div>
+                                  {ele.subcategories.length > 0 && (
+                                    <div className="relative">
+                                      <div className="absolute top-0 bottom-0 w-[1px] bg-white"></div>
+                                      <CaretDownFilled
+                                        className={clsx(
+                                          'text-white transition-all duration-300 px-6',
+                                          {
+                                            'rotate-180':
+                                              openSubCategory ===
+                                              ele.maDanhMucChinh,
+                                          },
+                                        )}
+                                      />
+                                    </div>
                                   )}
-                                </ul>
-                              )}
-                            </li>
-                          );
-                        },
-                      )}
+                                </div>
+                                {/* sub categories */}
+                                {openSubCategory.includes(
+                                  ele.maDanhMucChinh,
+                                ) && (
+                                  <ul>
+                                    {ele.subcategories.map(
+                                      (sub: ISubCategory, i: React.Key) => {
+                                        return (
+                                          <li
+                                            key={i}
+                                            className={clsx(
+                                              'flex items-center gap-2 text-[16px] text-white capitalize border-t border-dotted border-white first-of-type:mt-2 py-2 last-of-type:pb-0 z-50',
+                                            )}
+                                          >
+                                            <Image
+                                              src={ele.icon}
+                                              width={20}
+                                              height={20}
+                                              alt={sub.tenDanhMucNho}
+                                            />
+                                            <span>{sub.tenDanhMucNho}</span>
+                                          </li>
+                                        );
+                                      },
+                                    )}
+                                  </ul>
+                                )}
+                              </li>
+                            );
+                          },
+                        )}
                     </ul>
                   }
                 </li>
@@ -313,7 +335,8 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                       <li
                         key={index}
                         onClick={() => {
-                          ele.subLink.length > 0 && handleOpenSubMenu(ele.maNavLink);
+                          ele.subLink.length > 0 &&
+                            handleOpenSubMenu(ele.maNavLink);
                         }}
                         className={clsx(
                           'py-2 border-b border-solid border-white pl-8',

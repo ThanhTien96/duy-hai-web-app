@@ -65,7 +65,7 @@ const ProductSection = ({
               return (
                 <SplideSlide key={ele.maSanPham + idx}>
                   <ProductCard
-                    onClick={() => router.push(ele.maSanPham)}
+                    onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
                     id={ele.maSanPham}
                     title={ele?.tenSanPham}
                     discountPrice={ele?.giaGiam}
@@ -81,8 +81,8 @@ const ProductSection = ({
             })}
           </Splide>
         ) : (
-          <div className="col-span-12">
-            <Empty description="Không Có Sản Phẩm" />
+          <div className="col-span-12 text-center">
+            <Empty description="0 Sản Phẩm" />
           </div>
         )}
       </div>

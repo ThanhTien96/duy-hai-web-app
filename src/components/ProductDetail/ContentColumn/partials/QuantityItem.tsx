@@ -15,9 +15,8 @@ const QuantityItem = ({ className }: TQuantityItemProps) => {
     const [quantity, setQuantity] = useState<number>(1)
 
   return (
-    <div className={clsx(className)}>
+    <div className={clsx(className, "product-quantity" )}>
       <InputNumber
-      className='text-large'
         addonBefore={<PlusOutlined className='flex items-center justify-center' onClick={() => {
             setQuantity(current => current + 1)
         }} />}

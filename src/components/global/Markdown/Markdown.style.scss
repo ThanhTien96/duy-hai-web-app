@@ -1,0 +1,56 @@
+@import '../../../styles/mixin';
+@import '../../../styles/variable';
+
+.mark-down-container{
+    h1 {
+        @include text-mixin($size-h1, $weight-7, $leading-120);
+      }
+      
+      h2 {
+        @include text-mixin($size-h2, $weight-7, $leading-120);
+      }
+      
+      h3 {
+        @include text-mixin($size-h3, $weight-7, $leading-120);
+      }
+      
+      h4 {
+        @include text-mixin($size-h4, $weight-7, $leading-144);
+      }
+      
+      h5 {
+        @include text-mixin($size-h5, $weight-7, $leading-144);
+      }
+      
+      h6 {
+        @include text-mixin($size-h6, $weight-7, $leading-144);
+      }
+      
+      
+      p {
+        @include text-mixin($size-regular, $weight-4, $leading-144);
+      }
+
+      
+}
+
+.product-detail{
+  h1,h2,h3,h4,h5,h6{
+    margin-bottom: 10px;
+  }
+  p{
+    line-height: 28px;
+  }
+
+  table{
+    margin-top: 10px;
+    border-collapse: collapse !important;
+
+    tr td{
+      padding: 10px 15px;
+    }
+  }
+  table, tr, td{
+    border: 1px solid black;
+  }
+}

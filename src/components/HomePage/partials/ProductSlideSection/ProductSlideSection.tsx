@@ -89,6 +89,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
       {/* Title */}
       <TitleSection title={title} />
 
+      {/* saw  */}
       {productList && Array.isArray(productList) && productList.length > 0 ? (
         <Splide {...slidePropsTop} aria-label="My Favorite Images">
           {productList
@@ -100,6 +101,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
               return (
                 <SplideSlide key={ele?.maSanPham}>
                   <ProductCard
+                    onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
                     title={ele?.tenSanPham}
                     discountPrice={ele?.giaGiam}
                     price={ele?.giaGoc}
@@ -110,13 +112,14 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
             })}
         </Splide>
       ) : (
-        <div className="col-span-12">
-          <Empty description="Không Có Sản Phẩm" />
+        <div className="col-span-12 text-center">
+          <Empty description="0 Sản Phẩm" />
         </div>
       )}
 
-      <div className="mt-8">
-        {productList && Array.isArray(productList) && productList.length > 0 ? (
+      {/* lawn mower */}
+      {productList && Array.isArray(productList) && productList.length > 0 && (
+        <div className="mt-8">
           <Splide {...slidePropsBottom} aria-label="My Favorite Images">
             {productList
               ?.filter(
@@ -126,8 +129,8 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
               ?.map((ele: IProduct) => (
                 <SplideSlide key={ele.maSanPham}>
                   <ProductCard
-                  onClick={() => router.push(ele.maSanPham)}
-                  id={ele?.maSanPham}
+                    onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
+                    id={ele?.maSanPham}
                     title={ele?.tenSanPham}
                     discountPrice={ele?.giaGiam}
                     price={ele?.giaGoc}
@@ -136,12 +139,8 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
                 </SplideSlide>
               ))}
           </Splide>
-        ) : (
-          <div className="col-span-12">
-            <Empty description="Không Có Sản Phẩm" />
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

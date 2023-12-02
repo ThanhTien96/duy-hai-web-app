@@ -68,7 +68,7 @@ const TitleSection = ({
       <div
         className={clsx(
           styles.sectionBottom,
-          'w-full lg:w-9/12 h-[45px] flex items-center',
+          'w-full lg:w-9/12 lg:h-[45px] flex items-center',
         )}
       >
         {childTitle && childTitle.length > 0 && (

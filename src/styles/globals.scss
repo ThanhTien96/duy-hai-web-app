@@ -5,6 +5,13 @@
 @import './homePage.scss';
 @import './typography.scss';
 
-a{
-    cursor: pointer;
+a {
+  cursor: pointer;
+}
+
+
+
+p {
+  @include text-mixin($size-regular, $weight-4, $leading-144);
+  font-family: $font-nunito;
 }
