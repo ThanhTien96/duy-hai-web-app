@@ -60,7 +60,7 @@ const ProductListPagination = ({
       )
       
       }
-      {!loading &&data && Array.isArray(data) &&  data.length > 0 && <div className="col-span-12 text-center mt-4 lg:mt-8">
+      {!loading &&data && Array.isArray(data.data) &&  data.data.length > 0 && <div className="col-span-12 text-center mt-4 lg:mt-8">
         <Pagination
           onChange={(e) => onChangePage && onChangePage(e)}
           total={data && data.total}
