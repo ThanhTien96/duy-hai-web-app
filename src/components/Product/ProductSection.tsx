@@ -52,7 +52,6 @@ const ProductReducer = (state: TProductSlice, action: TProdSliceAction) => {
 };
 
 const ProductSection = ({ mainCategoryId }: TProductSectionProps) => {
-  console.log("☣️ >>> ProductSection >>> mainCategoryId: ", mainCategoryId)
   const [{ loading, products, pagination }, dispatch] = useReducer(
     ProductReducer,
     initialState,

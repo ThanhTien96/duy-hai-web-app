@@ -35,7 +35,6 @@ export default async function Page() {
           ]}
         />
       </Wrapper>
-      <DrashLog data={data} />
       {/* map content */}
       {data &&
         Array.isArray(data) &&

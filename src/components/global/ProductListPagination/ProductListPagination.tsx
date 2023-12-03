@@ -39,7 +39,7 @@ const ProductListPagination = ({
               <ProductCard
                 className="col-span-6 lg:col-span-3"
                 key={ele.maSanPham}
-                onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
+                onClick={() => router.push(`/san-pham/${ele.maSanPham}`)}
                 id={ele.maSanPham}
                 title={ele?.tenSanPham}
                 discountPrice={ele?.giaGiam}
@@ -60,7 +60,7 @@ const ProductListPagination = ({
       )
       
       }
-      {!loading && <div className="col-span-12 text-center mt-4 lg:mt-8">
+      {!loading &&data && Array.isArray(data) &&  data.length > 0 && <div className="col-span-12 text-center mt-4 lg:mt-8">
         <Pagination
           onChange={(e) => onChangePage && onChangePage(e)}
           total={data && data.total}

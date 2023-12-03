@@ -29,7 +29,7 @@ const SearchInput = ({
   return (
     <div style={{width: width || 'auto'}} className={clsx(className)}>
       <form onSubmit={handleSearch}>
-        <div className={clsx(styles.boxSearch, 'h-[40px]')}>
+        <div className={clsx(styles.boxSearch, 'h-[30px] lg:h-[40px]')}>
           <input
             className={clsx(styles.inputSearch, 'pl-2 pr-16')}
             onChange={(event) => setSearchValue(event.target.value)}

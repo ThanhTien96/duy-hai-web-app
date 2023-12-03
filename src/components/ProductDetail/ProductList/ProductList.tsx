@@ -12,12 +12,14 @@ type TProductListProps = {
   staticContent?: IPageProductContent;
   data?: { data: IProduct[] } & IPagination;
   mainCategoryId: string;
+  title?: string
 };
 
 const ProductList = ({
   staticContent,
   data,
   mainCategoryId,
+  title,
 }: TProductListProps) => {
   const [products, setProducts] = useState<
     ({ data: IProduct[] } & IPagination) | undefined
@@ -48,7 +50,7 @@ const ProductList = ({
         loading={sectionLoading}
         onChangePage={(page) => handleFetchProduct(page)}
         data={products}
-        title={staticContent?.productList.title}
+        title={title ?? staticContent?.productList.title}
       />
     </div>
   );

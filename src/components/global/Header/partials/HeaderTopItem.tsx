@@ -25,7 +25,7 @@ const HeaderTopItem = ({
     className={clsx("flex gap-2 items-center", className)}>
       <div>{icon}</div>
       <div>
-        <p>{title}</p>
+        <p className='hidden md:block'>{title}</p>
         {cart ? (
           <h6 className="font-semibold">
             {cart && (

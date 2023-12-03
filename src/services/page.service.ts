@@ -28,6 +28,31 @@ class PageService {
     });
   }
 
+  // sub categories
+  static async fetchSubCategories(filter?: {mainCategoryId?: string, withProduct?: boolean}) {
+    return await http({
+      url: apiPaths.subCategories,
+      method: "GET",
+      params: {
+        mainCategoryId: filter?.mainCategoryId,
+        withProduct: filter?.withProduct,
+      }
+    })
+  }
+
+  // fetch sub category detail
+  static async fetchSubCategoryDetail(id?: string, filter?: {page?: number, perPage?: number}) {
+    return await http({
+      url: apiPaths.subCategory,
+      method: "GET",
+      params: {
+        maDanhMucNho: id,
+        page: filter?.page, 
+        perPage: filter?.perPage
+      }
+    })
+  }
+
   // menu
   static async fetchMenu() {
     return await http({

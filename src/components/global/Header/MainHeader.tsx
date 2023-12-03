@@ -22,6 +22,8 @@ import {
 } from '@/@types/global';
 import useScroll from '@/hooks/useScroll';
 import { usePathname, useRouter } from 'next/navigation';
+import { removeDiacritics, stringToSlug } from '@/utils/common';
+import Link from 'next/link';
 
 type ChildSubLinkType = {
   id: string;
@@ -105,7 +107,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
               )}
             >
               <h5
-                onClick={() => router.push('san-pham')}
+                onClick={() => router.push('/san-pham')}
                 onMouseOver={() => setMouseHover(true)}
                 className={clsx(
                   'flex items-center xl:gap-8 lg:gap-2 !cursor-pointer',
@@ -139,10 +141,21 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           height={20}
                           alt={ele.tenDanhMuc}
                         />
-                        <span>{ele.tenDanhMuc}</span>
+                        <span
+                          onClick={() =>
+                            router.push(
+                              `/danh-muc/${ele.maDanhMucChinh}`,
+                            )
+                          }
+                        >
+                          {ele.tenDanhMuc}
+                        </span>
 
                         {/* print sub category */}
-                        <ul className={clsx(styles.subCategoryBox)}>
+                        <ul
+                          className={clsx(styles.subCategoryBox)}
+                          style={{ zIndex: 1000 }}
+                        >
                           {ele.subcategories.map(
                             (subCategory: ISubCategory, key: number) => {
                               return (
@@ -156,7 +169,15 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                                     height={20}
                                     alt={subCategory.tenDanhMucNho}
                                   />
-                                  <p>{subCategory.tenDanhMucNho}</p>
+                                  <p
+                                    onClick={() =>
+                                      router.replace(
+                                        `/danh-muc/${ele.maDanhMucChinh}/${subCategory.maDanhMucNho}`,
+                                      )
+                                    }
+                                  >
+                                    {subCategory.tenDanhMucNho}
+                                  </p>
                                 </li>
                               );
                             },
@@ -198,10 +219,10 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
           </ul>
 
           {/* mobile menu */}
-          <div className="flex justify-between items-center py-2 lg:hidden z-50">
+          <div className="flex justify-between items-center py-2 lg:hidden z-50 gap-8">
             <MenuUnfoldOutlined
               onClick={() => handleOpenMenu()}
-              className="text-3xl text-white flex items-center justify-center"
+              className="text-xl text-white flex items-center justify-center"
             />
             <SearchInput className="shadow-inner" />
           </div>
@@ -213,11 +234,11 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                 openMenu && styles.activeMenu,
               )}
             >
-              <div className=" border-b-2 border-solid border-white pt-4 pb-2 relative">
-                <CaretLeftOutlined
-                  onClick={() => handleOpenMenu()}
-                  className="text-xl text-white flex items-center justify-center absolute top-1/2 left-2 -translate-y-1/2"
-                />
+              <div
+                onClick={() => handleOpenMenu()}
+                className=" border-b-2 border-solid border-white pt-4 pb-2 relative"
+              >
+                <CaretLeftOutlined className="text-xl text-white flex items-center justify-center absolute top-1/2 left-2 -translate-y-1/2" />
                 <h4 className="text-white text-[16px] w-full text-center">
                   Menu
                 </h4>
@@ -229,24 +250,30 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                     'py-2 border-b border-solid border-white pl-8 text-white',
                   )}
                 >
-                  <div
-                    onClick={() => handleOpenCategory()}
-                    className="relative"
-                  >
-                    <span>Danh Mục Sản Phẩm</span>
-                    <CaretRightOutlined className="flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-8" />
+                  <div className="relative">
+                    <span onClick={() => router.push('/san-pham')}>
+                      Danh Mục Sản Phẩm
+                    </span>
+                    <CaretRightOutlined
+                      onClick={() => {
+                        handleOpenCategory();
+                      }}
+                      className="flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-8"
+                    />
                   </div>
                   {/* main category */}
                   {
                     <ul
                       className={clsx(
-                        'absolute z-50 bg-app-500 w-full z-50',
+                        'absolute z-50 bg-app-500 w-full',
                         styles.subCategory,
                         openCategory && styles.activeSubCategory,
                       )}
                     >
                       <div
-                        onClick={() => handleOpenCategory()}
+                        onClick={() => {
+                          handleOpenCategory();
+                        }}
                         className=" border-b-2 border-solid border-white pt-4 pb-2 relative"
                       >
                         <CaretLeftOutlined className="text-lg text-white flex items-center justify-center absolute top-1/2 left-2 -translate-y-1/2" />
@@ -260,9 +287,6 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           (ele: IMainCategory, index: number) => {
                             return (
                               <li
-                                onClick={() =>
-                                  handleOpenSubCategory(ele.maDanhMucChinh)
-                                }
                                 className={clsx(
                                   'py-2 border-b border-solid border-white pl-8',
                                 )}
@@ -276,12 +300,27 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                                       height={20}
                                       alt={ele.tenDanhMuc}
                                     />
-                                    <span>{ele.tenDanhMuc}</span>
+                                    <span
+                                      onClick={() => {
+                                        router.push(
+                                          `/danh-muc/${ele.maDanhMucChinh}`,
+                                        );
+                                        handleOpenCategory();
+                                        handleOpenMenu();
+                                      }}
+                                    >
+                                      {ele.tenDanhMuc}
+                                    </span>
                                   </div>
                                   {ele.subcategories.length > 0 && (
                                     <div className="relative">
                                       <div className="absolute top-0 bottom-0 w-[1px] bg-white"></div>
                                       <CaretDownFilled
+                                        onClick={() =>
+                                          handleOpenSubCategory(
+                                            ele.maDanhMucChinh,
+                                          )
+                                        }
                                         className={clsx(
                                           'text-white transition-all duration-300 px-6',
                                           {
@@ -314,7 +353,17 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                                               height={20}
                                               alt={sub.tenDanhMucNho}
                                             />
-                                            <span>{sub.tenDanhMucNho}</span>
+                                            <span
+                                              onClick={() => {
+                                                router.push(
+                                                  `/danh-muc/${ele.maDanhMucChinh}/${sub.maDanhMucNho}`,
+                                                );
+                                                handleOpenCategory();
+                                                handleOpenMenu();
+                                              }}
+                                            >
+                                              {sub.tenDanhMucNho}
+                                            </span>
                                           </li>
                                         );
                                       },
@@ -347,7 +396,11 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                             'flex gap-4 items-center': ele.subLink.length > 0,
                           })}
                         >
-                          <MenuLink content={ele.tenNavLink} link={ele.url} />
+                          <MenuLink
+                            onClick={handleOpenMenu}
+                            content={ele.tenNavLink}
+                            link={ele.url}
+                          />
                           {ele.subLink.length > 0 && (
                             <CaretDownFilled
                               className={clsx(

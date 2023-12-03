@@ -23,7 +23,7 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
       <Wrapper className="!py-4">
         <div className="flex justify-between items-center">
           {/* logo */}
-          <div className="w-[60px] h-[60px] rounded-full overflow-hidden !cursor-pointer">
+          <div className="w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] rounded-full overflow-hidden !cursor-pointer">
             <Link className='' href="/">
               <Image
                 className="w-full h-full object-contain"
@@ -55,7 +55,7 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
             <HeaderTopItem
               className="cursor-pointer"
               icon={
-                <ShoppingCartOutlined className="text-[42px] text-app-500" />
+                <ShoppingCartOutlined className="text-[32px] lg:text-[42px] text-app-500" />
               }
               title="Giỏ Hàng"
               subTitle="Sản Phẩm"

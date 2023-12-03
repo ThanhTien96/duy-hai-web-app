@@ -3,6 +3,8 @@ export const apiPaths = {
     banner: "/layDanhSachBanner",
     youtubePost: "/layDanhSachYT",
     mainCategory: "/layDanhMuc",
+    subCategories: "/layDanhMucNho",
+    subCategory: "/chiTietDanhMucNho",
     menu: "/menu",
     product: "/layDanhSachSanPham",
     productIncludeSubCategories: "/laySanPhamTheoDanhMucNho",
