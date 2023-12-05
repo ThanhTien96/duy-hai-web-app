@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { IMediaBase } from '@/@types/global';
@@ -8,17 +8,25 @@ import { EMPTY_IMAGE } from '@/constants';
 import '../ProductDetail.style.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { IProductMedia } from '@/@types/product';
 
 type TMediaListProps = {
   className?: string;
-  mediaList?: IMediaBase[];
+  mediaList?: IProductMedia[];
 };
 
 const MediaList = ({ className, mediaList }: TMediaListProps) => {
-  const [baseSrc, setBaseSrc] = useState<IMediaBase | undefined>(
-    mediaList && mediaList[0],
+  const [baseSrc, setBaseSrc] = useState<IProductMedia | undefined>(
+    mediaList && mediaList.find((ele: IProductMedia) => ele.hinhAnh),
   );
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if(mediaList) {
+      const img = mediaList.find((ele: IProductMedia) => ele.hinhAnh);
+      setBaseSrc(img)
+    }
+  },[mediaList])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -91,7 +99,7 @@ const MediaList = ({ className, mediaList }: TMediaListProps) => {
         <Splide {...slideProps}>
           {mediaList &&
             Array.isArray(mediaList) &&
-            mediaList?.map((ele: IMediaBase) => (
+            mediaList?.map((ele: IProductMedia) => (
               <SplideSlide key={ele.id}>
                 <div
                   onClick={() => setBaseSrc(ele)}
