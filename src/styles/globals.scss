@@ -15,3 +15,10 @@ p {
   @include text-mixin($size-regular, $weight-4, $leading-144);
   font-family: $font-nunito;
 }
+
+.product-quantity{
+  :where(.css-dev-only-do-not-override-17a39f8).ant-input-number .ant-input-number-input{
+    text-align: center;
+    font-weight: 600;
+  }
+}

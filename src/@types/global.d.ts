@@ -4,6 +4,7 @@ export interface IMediaBase {
   readonly id: string;
   hinhAnh: string;
   maTinTuc: string;
+  
 }
 
 export interface IPagination {

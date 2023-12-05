@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 type TQuantityItemProps = {
   className?: string;
-  defaultValue?: string;
+  defaultValue?: number;
   onIncrease?: (value: number) => void;
 };
 

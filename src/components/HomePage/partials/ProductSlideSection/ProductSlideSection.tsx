@@ -41,7 +41,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
         pauseOnFocus: true,
         pauseOnHover: true,
         rewind: true,
-        speed: 1,
+        speed: 0.6,
       },
       lazyLoad: true,
       reducedMotion: {
@@ -72,7 +72,7 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
         pauseOnFocus: true,
         pauseOnHover: true,
         rewind: true,
-        speed: 1,
+        speed: 0.6,
       },
       lazyLoad: true,
       reducedMotion: {
@@ -101,11 +101,8 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
               return (
                 <SplideSlide key={ele?.maSanPham}>
                   <ProductCard
+                    product={ele}
                     onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
-                    title={ele?.tenSanPham}
-                    discountPrice={ele?.giaGiam}
-                    price={ele?.giaGoc}
-                    image={ele?.hinhAnh[0]?.hinhAnh}
                   />
                 </SplideSlide>
               );
@@ -129,12 +126,8 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
               ?.map((ele: IProduct) => (
                 <SplideSlide key={ele.maSanPham}>
                   <ProductCard
+                    product={ele}
                     onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
-                    id={ele?.maSanPham}
-                    title={ele?.tenSanPham}
-                    discountPrice={ele?.giaGiam}
-                    price={ele?.giaGoc}
-                    image={ele?.hinhAnh[0]?.hinhAnh}
                   />
                 </SplideSlide>
               ))}

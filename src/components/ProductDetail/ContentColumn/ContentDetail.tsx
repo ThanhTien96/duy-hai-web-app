@@ -55,7 +55,7 @@ const ContentDetail = ({
         {/* quantity */}
         <div className="flex items-center gap-4 my-6 w-full">
           <p className="text-large">{staticContent?.contentDetail?.soLuong}: </p>
-          <QuantityItem className="w-[35%]" />
+          <QuantityItem defaultValue={1} className="w-[35%]" />
         </div>
         {/* action */}
         <div className="flex items-center gap-6 w-full">

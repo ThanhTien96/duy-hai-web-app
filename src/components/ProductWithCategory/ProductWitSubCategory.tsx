@@ -56,18 +56,10 @@ const ProductWitSubCategory = ({
             {products && products.data?.danhSachSanPham &&Array.isArray(products.data.danhSachSanPham) && products.data.danhSachSanPham.length > 0 ? (
               products.data?.danhSachSanPham?.map((ele: IProduct) => (
                 <ProductCard
+                product={ele}
                   className="col-span-6 lg:col-span-3"
                   key={ele.maSanPham}
                   onClick={() => router.push(`/san-pham/${ele.maSanPham}`)}
-                  id={ele.maSanPham}
-                  title={ele?.tenSanPham}
-                  discountPrice={ele?.giaGiam}
-                  price={ele?.giaGoc}
-                  image={
-                    ele.hinhAnh && Array.isArray(ele.hinhAnh)
-                      ? ele?.hinhAnh[0]?.hinhAnh
-                      : EMPTY_IMAGE
-                  }
                 />
               ))
             ) : (
