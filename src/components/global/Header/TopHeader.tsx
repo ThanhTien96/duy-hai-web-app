@@ -2,11 +2,13 @@
 import { SearchInput, Wrapper } from '@/components/shared';
 import { PhoneFilled, ShoppingCartOutlined } from '@ant-design/icons';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import HeaderTopItem from './partials/HeaderTopItem';
 import { EMPTY_IMAGE } from '@/constants';
 import Link from 'next/link';
+import { useAppSelector } from '@/store';
+import { IProductCart } from '@/store/cart/cartSlice';
 
 const { Search } = Input;
 
@@ -17,6 +19,18 @@ type TTopHeaderProps = {
 const TopHeader = ({ logo }: TTopHeaderProps) => {
   /** handle search function */
   const onSearch = (value: string) => console.log(value);
+  const {cartList} = useAppSelector((state) => state.cart);
+  const [cartQuantity, setCartQuantity] = useState<number>(0);
+
+  useEffect(() => {
+    if (cartList) {
+      const value = cartList?.reduce((prev: number, crr: IProductCart) => {
+        console.log(prev, crr);
+        return prev + crr.quantity;
+      }, 0);
+      setCartQuantity(value)
+    }
+  }, [cartList]);
 
   return (
     <div>
@@ -24,7 +38,7 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
         <div className="flex justify-between items-center">
           {/* logo */}
           <div className="w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] rounded-full overflow-hidden !cursor-pointer">
-            <Link className='' href="/">
+            <Link className="" href="/">
               <Image
                 className="w-full h-full object-contain"
                 src={logo ?? EMPTY_IMAGE}
@@ -59,7 +73,7 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
               }
               title="Giỏ Hàng"
               subTitle="Sản Phẩm"
-              cartContent={0}
+              cartContent={cartQuantity}
               cart={true}
             />
           </div>

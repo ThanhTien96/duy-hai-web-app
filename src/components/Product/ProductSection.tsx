@@ -98,15 +98,7 @@ const ProductSection = ({ mainCategoryId }: TProductSectionProps) => {
                 className="col-span-6 lg:col-span-3"
                 key={ele.maSanPham}
                 onClick={() => router.push(`/san-pham/${ele.maSanPham}`)}
-                id={ele.maSanPham}
-                title={ele?.tenSanPham}
-                discountPrice={ele?.giaGiam}
-                price={ele?.giaGoc}
-                image={
-                  ele.hinhAnh && Array.isArray(ele.hinhAnh)
-                    ? ele?.hinhAnh[0]?.hinhAnh
-                    : EMPTY_IMAGE
-                }
+                product={ele}
               />
             ))
           ) : (

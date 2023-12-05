@@ -14,6 +14,9 @@ import { Modal } from 'antd';
 import { OrderItem } from './partials';
 import { IProduct, IProductMedia } from '@/@types/product';
 import { IMediaBase } from '@/@types/global';
+import { useAppDispatch } from '@/store';
+import { setAlert } from '@/store/app/appSlice';
+import { addToCart } from '@/store/cart/cartSlice';
 
 type ProductCardProps = {
   product: IProduct;
@@ -29,6 +32,16 @@ const ProductCard = ({ product, onClick, className }: ProductCardProps) => {
     Array.isArray(product.hinhAnh) &&
     product.hinhAnh.length > 0 &&
     product?.hinhAnh.find((img: IProductMedia) => img.hinhChinh);
+  const dispatch = useAppDispatch();
+
+  // handle add to Cart
+  const handleAddTocar = (quantity: number) => {
+    dispatch(
+      setAlert({ message: 'Thêm Giỏ Hàng Thành Công', status: 'success' }),
+    );
+    dispatch(addToCart({ product, quantity }));
+    setOpenOrder(false);
+  };
 
   return (
     <div
@@ -117,9 +130,8 @@ const ProductCard = ({ product, onClick, className }: ProductCardProps) => {
         footer={null}
       >
         <OrderItem
-          image={baseImage ? baseImage?.hinhAnh : sharedContent.emtyImage}
-          productName={product?.tenSanPham}
-          price={product?.giaGiam}
+          onAddToCart={(quantity) => handleAddTocar(quantity)}
+          product={product}
         />
       </Modal>
     </div>

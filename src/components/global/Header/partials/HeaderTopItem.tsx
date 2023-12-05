@@ -29,7 +29,7 @@ const HeaderTopItem = ({
         {cart ? (
           <h6 className="font-semibold">
             {cart && (
-              <span className="w-5 h-5 bg-app-500 inline-flex items-center justify-center text-white font-medium rounded-full mr-2">
+              <span className="w-6 h-6 bg-app-500 inline-flex items-center justify-center text-white font-medium rounded-full mr-2 text-[14px]">
                 {cartContent}
               </span>
             )}

@@ -10,11 +10,11 @@ import { FONT_UBUNTU, FONT_NUNITO_SANS } from '@/font/font';
 import Loading from './loading';
 import { Suspense } from 'react';
 import { FALLBACK_SEO } from '@/constants';
-
+import { LoadingProvider, MessageProvider } from '@/components/shared';
 
 export async function generateMetadata(): Promise<Metadata> {
   return FALLBACK_SEO;
-};
+}
 
 async function getData() {
   const categories = await PageService.fetchMainCategory();
@@ -47,14 +47,25 @@ export default async function RootLayout({
       </head>
       <body
         suppressHydrationWarning={true}
-        className={clsx(FONT_UBUNTU.variable,  FONT_NUNITO_SANS.variable, 'relative')}
+        className={clsx(
+          FONT_UBUNTU.variable,
+          FONT_NUNITO_SANS.variable,
+          'relative',
+        )}
       >
         <StoreProvider>
-          <HeaderApp categoriesData={categories} logo={menu.logo} menuData={menu} />
-          <Suspense fallback={<Loading />}>
-            <div className="mt-[135px]">{children}</div>
-          </Suspense>
-          <Footer categories={categories} />
+          <MessageProvider>
+            <HeaderApp
+              categoriesData={categories}
+              logo={menu.logo}
+              menuData={menu}
+            />
+            <Suspense fallback={<Loading />}>
+              <div className="mt-[135px]">{children}</div>
+            </Suspense>
+            <Footer categories={categories} />
+            <LoadingProvider />
+          </MessageProvider>
         </StoreProvider>
       </body>
     </html>

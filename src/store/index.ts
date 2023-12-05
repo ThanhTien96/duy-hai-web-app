@@ -6,6 +6,7 @@ const preloadedState  = {};
 
 const store = configureStore({
     reducer: createReducer(),
+    devTools: process.env.NODE_ENV !== "production",
     preloadedState
 });
 
@@ -23,6 +24,5 @@ export type TypeThunk<ReturnType = void> = ThunkAction<
 
 // Store custom hook
 export const useAppDispatch = () => useDispatch<TypeDispatch>();
-export const useAppSelector: TypedUseSelectorHook<StoreState> = () => useSelector;
-
+export const useAppSelector: TypedUseSelectorHook<StoreState> =  useSelector;
 export default store;
