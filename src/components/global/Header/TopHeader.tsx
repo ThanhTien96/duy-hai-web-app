@@ -3,12 +3,16 @@ import { SearchInput, Wrapper } from '@/components/shared';
 import { PhoneFilled, ShoppingCartOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
+import { Input, Modal } from 'antd';
 import HeaderTopItem from './partials/HeaderTopItem';
-import { EMPTY_IMAGE } from '@/constants';
+import { EMPTY_IMAGE, pagePath } from '@/constants';
 import Link from 'next/link';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { IProductCart } from '@/store/cart/cartSlice';
+import Cart from './partials/Cart';
+import { ButtonShared } from '..';
+import { useRouter } from 'next/navigation';
+import { setAlert } from '@/store/app/appSlice';
 
 const { Search } = Input;
 
@@ -17,18 +21,20 @@ type TTopHeaderProps = {
 };
 
 const TopHeader = ({ logo }: TTopHeaderProps) => {
+  const dispatch = useAppDispatch();
   /** handle search function */
   const onSearch = (value: string) => console.log(value);
-  const {cartList} = useAppSelector((state) => state.cart);
+  const { cartList } = useAppSelector((state) => state.cart);
   const [cartQuantity, setCartQuantity] = useState<number>(0);
+  const [openCart, setOpenCart] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (cartList) {
-      const value = cartList?.reduce((prev: number, crr: IProductCart) => {
-        console.log(prev, crr);
+      const value = cartList.length > 0 ? cartList?.reduce((prev: number, crr: IProductCart) => {
         return prev + crr.quantity;
-      }, 0);
-      setCartQuantity(value)
+      }, 0) : 0;
+      setCartQuantity(value);
     }
   }, [cartList]);
 
@@ -67,6 +73,7 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
               cart={false}
             />
             <HeaderTopItem
+              onClick={() => setOpenCart((current) => !current)}
               className="cursor-pointer"
               icon={
                 <ShoppingCartOutlined className="text-[32px] lg:text-[42px] text-app-500" />
@@ -79,6 +86,29 @@ const TopHeader = ({ logo }: TTopHeaderProps) => {
           </div>
         </div>
       </Wrapper>
+      {/* cart */}
+      <Modal
+        title="Giỏ Hàng"
+        rootClassName="!p-0"
+        open={openCart}
+        onCancel={() => setOpenCart(false)}
+        footer={[
+          cartList && cartList.length > 0 && <ButtonShared
+            onClick={() => {
+              if(cartList.length > 0) {
+                router.push(`/${pagePath.payment}`);
+              } else {
+                dispatch(setAlert({message:"Vui lòng chọn sản phẩm trước khi thanh toán!", status: "error"}))
+              }
+              setOpenCart(false);
+            }}
+            key={'Payment'}
+            content="Thanh Toán"
+          />,
+        ]}
+      >
+        <Cart />
+      </Modal>
     </div>
   );
 };

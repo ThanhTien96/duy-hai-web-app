@@ -1,4 +1,5 @@
 'use client';
+import { Title } from '@/components/shared';
 import { PlayIcon } from '@/libIcon';
 import sharedContent from '@/utils/shared';
 import { Modal } from 'antd';
@@ -47,9 +48,9 @@ const YoutubeBottom = ({
       </div>
       <Link href={link ?? ''} target='_blank'>
         <div className="mt-2 px-2 text-center">
-          <h1 className="line-clamp-2 lg:text-[16px] text-[12px] font-semibold transition-all duration-300 hover:text-app-500 cursor-pointer">
+          <Title level={1} className="line-clamp-2 lg:text-[14px] text-[12px] font-semibold transition-all duration-300 hover:text-app-500 cursor-pointer">
             {title}
-          </h1>
+          </Title>
         </div>
       </Link>
 

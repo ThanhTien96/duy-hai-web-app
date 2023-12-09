@@ -11,4 +11,5 @@ export const apiPaths = {
     productDetail: "/layChiTietSanPham",
     productPagination: "/laySanPhamPhanTrang",
     news: "/layTinTucPhanTrang",
+    paymentInfo: "/layDanhSachThanhToan",
 }

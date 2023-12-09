@@ -7,21 +7,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    colors: {
-      'transparent': 'transparent',
-      'white': '#ffffff',
-      'black': '#000000',
-      'app-500': '#ff8027',
-      'app-600': '#ea580c',
-      'gray-border': '#cccccc',
-      'sub-text': '#38383866',
-      'error': '#ff0000eb',
-      'warning': '#ccff33',
-      'success': '#33ff66f2',
-      'primary': '#3366ff',
-      'menu-active': '#f9e68a',
-      'yellow-300': '#fff000'
-    },
     container: {
       center: true,
       padding: {
@@ -41,6 +26,35 @@ const config: Config = {
       '2xl': '1536px',
     },
     extend: {
+      colors: {
+        'transparent': 'transparent',
+        'white': '#ffffff',
+        'black': '#000000',
+        'app-500': '#ff8027',
+        'app-600': '#ea580c',
+        'gray-border': '#cccccc',
+        'sub-text': '#38383866',
+        'error': '#ff0000eb',
+        'warning': '#ccff33',
+        'success': '#33ff66f2',
+        'primary': '#3366ff',
+        'menu-active': '#f9e68a',
+        'yellow-300': '#fff000',
+        'dark-1': '#0e1c36',
+        'dark-2': '#172a3a',
+        'dark-3': '#31435a'
+      },
+      gap: {
+        "space-1": "calc(3.2px + 0.25vw)", 
+        "space-2": "calc(6.4px + 0.5vw)",
+        "space-3": "calc(14.4px + 0.5vw)",
+        "space-4": "calc(12.8px + 1vw)",
+        "space-5": "calc(25.6px + 2vw)",
+        "space-6": "calc(28.8px + 2.25vw)",
+        "space-7": "calc(57.6px + 4.5vw)",
+        "space-8": "calc(-28.8px + 14vw)",
+        "space-9": "calc(-52.8px + 21.5vw)"
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

@@ -43,7 +43,7 @@ const BannerSection = ({ banner, youtubePost, className }: BannerSectionProps) =
               return (
                 <div
                   key={ele.maYT}
-                  className="col-span-6 lg:col-span-3 bg-red-400 w-full h-full"
+                  className="col-span-6 lg:col-span-3 w-full h-full"
                 >
                   <YoutubeBottom
                     src={ele.hinhAnh}

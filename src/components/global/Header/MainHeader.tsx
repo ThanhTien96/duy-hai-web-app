@@ -142,6 +142,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                           alt={ele.tenDanhMuc}
                         />
                         <span
+                        className='text-medium'
                           onClick={() =>
                             router.push(
                               `/danh-muc/${ele.maDanhMucChinh}`,
@@ -170,6 +171,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                                     alt={subCategory.tenDanhMucNho}
                                   />
                                   <p
+                                  className='text-medium'
                                     onClick={() =>
                                       router.replace(
                                         `/danh-muc/${ele.maDanhMucChinh}/${subCategory.maDanhMucNho}`,
@@ -344,7 +346,7 @@ const MainHeader = ({ menuData, categoriesData }: MainHeaderProps) => {
                                           <li
                                             key={i}
                                             className={clsx(
-                                              'flex items-center gap-2 text-[16px] text-white capitalize border-t border-dotted border-white first-of-type:mt-2 py-2 last-of-type:pb-0 z-50',
+                                              'flex items-center gap-2 text-[14px] text-white capitalize border-t border-dotted border-white first-of-type:mt-2 py-2 last-of-type:pb-0 z-50',
                                             )}
                                           >
                                             <Image

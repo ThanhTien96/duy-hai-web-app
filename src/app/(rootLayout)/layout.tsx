@@ -11,6 +11,7 @@ import Loading from './loading';
 import { Suspense } from 'react';
 import { FALLBACK_SEO } from '@/constants';
 import { LoadingProvider, MessageProvider } from '@/components/shared';
+import { ConfigProvider } from 'antd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return FALLBACK_SEO;

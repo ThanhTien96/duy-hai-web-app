@@ -18,7 +18,6 @@ const CogToothIcon = ({ className, width, height }: CogToothIconProps) => {
         height={height}
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6"
       >
         <path
           strokeLinecap="round"
