@@ -129,6 +129,7 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
             label="Tỉnh / Thành Phố"
           >
             <Select
+            className='max-w-full'
               placeholder="Chọn Tỉnh / Thành Phố"
               showSearch
               value={values.tinh ? values.tinh : undefined}
@@ -168,9 +169,10 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
             label="Quận / Huyện"
           >
             <Select
+              className='max-w-full'
               placeholder="Chọn Quận / Huyện"
               showSearch
-              className="inline-block w-full md:w-[calc(50%-4px)]"
+              
               filterOption={(input, option) =>
                 stringToSlug((option?.label ?? '').toLowerCase()).includes(
                   stringToSlug(input.toLowerCase()),
@@ -199,6 +201,7 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
           >
             <Select
               placeholder="Chọn Phường / Xã"
+              className='max-w-full'
               showSearch
               value={values.xa ? values.xa : undefined}
               filterOption={(input, option) =>
