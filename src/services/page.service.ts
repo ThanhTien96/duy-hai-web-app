@@ -1,3 +1,4 @@
+import { IOrderPayload } from '@/@types/order';
 import { PAGE_SIZE, apiPaths } from '@/constants';
 import { http } from '@/http';
 
@@ -115,6 +116,16 @@ class PageService {
         perPage,
       },
     });
+  }
+
+  /** ORDER PRODUCT */
+  static async orderProduct(payload: IOrderPayload, signal?: AbortSignal) {
+    return await http({
+      url: apiPaths.orderProduct,
+      method: 'POST',
+      data: payload,
+      signal
+    })
   }
 }
 

@@ -10,27 +10,36 @@ import {
   inscreaseProduct,
 } from '@/store/cart/cartSlice';
 import Image from 'next/image';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Title } from '../shared';
 import { QuantityItem } from '../ProductDetail/ContentColumn/partials';
 import { ButtonShared } from '../global';
 import type { RadioChangeEvent } from 'antd';
-import { Divider, Input, Radio, Space } from 'antd';
+import { ConfigProvider, Divider, Input, Radio, Space, Tooltip } from 'antd';
 import { IPaymentCardInfo } from '@/@types/payment';
 import clsx from 'clsx';
+import { EPaymentMethod, setPaymentMethod } from '@/store/payment/paymentSlice';
+import { CopyOutlined } from '@ant-design/icons';
 
 type Props = {};
 
 const PaymentItemInfo = (props: Props) => {
   const { cartList } = useAppSelector((state) => state.cart);
-  const { paymentMethod } = useAppSelector((state) => state.payment);
+  const { paymentCardInfo } = useAppSelector((state) => state.payment);
   const dispatch = useAppDispatch();
   const [method, setMethod] = useState(1);
+  const [isCopy, setIsCopy] = useState<string>('');
 
   const onChange = (e: RadioChangeEvent) => {
     console.log('radio checked', e.target.value);
     setMethod(e.target.value);
   };
+
+  useEffect(() => {
+    const meth =
+      method === 1 ? EPaymentMethod.CASH : EPaymentMethod.CREDIT_CARD;
+    dispatch(setPaymentMethod(meth));
+  }, [method]);
 
   const totalPrice = useMemo(() => {
     return cartList.reduce(
@@ -40,8 +49,23 @@ const PaymentItemInfo = (props: Props) => {
     );
   }, [cartList]);
 
+  // handle copy
+  const handleCopy = useCallback(async (data: string, id: string) => {
+    await navigator.clipboard.writeText(data);
+    setIsCopy(id);
+    setTimeout(() => {
+      setIsCopy('');
+    }, 1000);
+  }, []);
+
   return (
-    <div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#ff8027',
+        },
+      }}
+    >
       <div>
         {cartList &&
           Array.isArray(cartList) &&
@@ -73,7 +97,7 @@ const PaymentItemInfo = (props: Props) => {
                 <div className="block lg:flex items-center justify-between">
                   <QuantityItem
                     size="small"
-                    className="lg:w-[30%]"
+                    className="lg:w-[30%] !text-center"
                     onIncrease={() =>
                       dispatch(inscreaseProduct({ id: item.product.maSanPham }))
                     }
@@ -83,7 +107,11 @@ const PaymentItemInfo = (props: Props) => {
                     defaultValue={item?.quantity}
                   />
                   <ButtonShared
-                    onClick={() => dispatch(deleteProductFormCart({id: item.product.maSanPham}))}
+                    onClick={() =>
+                      dispatch(
+                        deleteProductFormCart({ id: item.product.maSanPham }),
+                      )
+                    }
                     className="!w-full lg:!w-auto mt-2 lg:mt-0"
                     content="Xoá"
                   />
@@ -125,12 +153,12 @@ const PaymentItemInfo = (props: Props) => {
               },
             )}
           >
-            {paymentMethod &&
-              Array.isArray(paymentMethod) &&
-              paymentMethod.map((method: IPaymentCardInfo) => (
+            {paymentCardInfo &&
+              Array.isArray(paymentCardInfo) &&
+              paymentCardInfo.map((method: IPaymentCardInfo) => (
                 <div
                   key={method.id}
-                  className="flex items-center gap-4 h-[100px]"
+                  className="flex items-center gap-4 h-[100px] w-full relative"
                 >
                   <Image
                     src={
@@ -150,12 +178,16 @@ const PaymentItemInfo = (props: Props) => {
                     </p>
                     <p className="text-medium capitalize">{method.chiNhanh}</p>
                   </div>
+                  {/* copy */}
+                  <Tooltip open={isCopy === method.id} title="copy thành công">
+                    <CopyOutlined onClick={() => handleCopy(method.soTaiKhoan, method.id)} className="absolute top-2 right-2 p-1 bg-gray-200 rounded-md hover:text-white hover:bg-gray-500 cursor-pointer" />
+                  </Tooltip>
                 </div>
               ))}
           </div>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 };
 

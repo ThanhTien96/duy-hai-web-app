@@ -52,7 +52,7 @@ export default async function Home(props: any) {
   return (
     <div>
       {/* hero section */}
-      <Wrapper className="!pt-2">
+      <Wrapper>
         <BannerSection youtubePost={data?.youtube} banner={data?.banner} />
       </Wrapper>
       {/* special section */}

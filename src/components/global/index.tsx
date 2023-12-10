@@ -8,3 +8,4 @@ export { default as Fotter } from './Footer';
 export { default as MarkdownX } from './Markdown';
 export { default as ProductListPagination } from './ProductListPagination';
 export { default as SectionLoading } from './SectionLoading';
+export { default as LoadingClient } from './LoadingClient';

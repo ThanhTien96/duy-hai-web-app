@@ -5,10 +5,10 @@ import React, { useEffect } from 'react'
 import { message as _message } from 'antd'
 
 type TMessagesProviderProps = {
-    children: React.ReactNode;
+
 }
 
-function MessagesProvider({children}: TMessagesProviderProps) {
+function MessagesProvider(props: TMessagesProviderProps) {
 
     const {message, status, logs} = useAppSelector(state => state.app)
 
@@ -25,9 +25,8 @@ function MessagesProvider({children}: TMessagesProviderProps) {
         }
     },[logs])
 
-  return <App>
-    {children}
-  </App>
+  return <>
+  </>
 }
 
 export default MessagesProvider

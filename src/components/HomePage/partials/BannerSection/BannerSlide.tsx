@@ -31,7 +31,7 @@ const BannerSlide = ({ banner }: TBannerSlideProps) => {
           Array.isArray(banner) &&
           banner.map((ele: IBanner) => (
             <SplideSlide key={ele.maBanner}>
-              <div className="w-full h-[310px] overflow-hidden">
+              <div className="w-full h-[210px] lg:h-[305px] overflow-hidden">
                 <Image
                   width={0}
                   height={0}
@@ -43,7 +43,7 @@ const BannerSlide = ({ banner }: TBannerSlideProps) => {
             </SplideSlide>
           ))}
       </Splide>
-      <div className="w-full h-[310px] overflow-hidden"></div>
+      {/* <div className="w-full h-[210px] lg:h-[305px] overflow-hidden"></div> */}
     </div>
   );
 };

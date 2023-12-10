@@ -11,7 +11,6 @@ import Loading from './loading';
 import { Suspense } from 'react';
 import { FALLBACK_SEO } from '@/constants';
 import { LoadingProvider, MessageProvider } from '@/components/shared';
-import { ConfigProvider } from 'antd';
 
 export async function generateMetadata(): Promise<Metadata> {
   return FALLBACK_SEO;
@@ -49,24 +48,25 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning={true}
         className={clsx(
-          FONT_UBUNTU.variable,
-          FONT_NUNITO_SANS.variable,
+          FONT_UBUNTU.className,
+          FONT_NUNITO_SANS.className,
           'relative',
         )}
       >
         <StoreProvider>
-          <MessageProvider>
-            <HeaderApp
-              categoriesData={categories}
-              logo={menu.logo}
-              menuData={menu}
-            />
-            <Suspense fallback={<Loading />}>
-              <div className="mt-[135px]">{children}</div>
-            </Suspense>
-            <Footer categories={categories} />
-            <LoadingProvider />
-          </MessageProvider>
+          <HeaderApp
+            categoriesData={categories}
+            logo={menu.logo}
+            menuData={menu}
+          />
+
+          <Suspense fallback={<Loading />}>
+            <div className="mt-[95px] lg:mt-[135px]">{children}</div>
+          </Suspense>
+
+          <Footer categories={categories} />
+          <LoadingProvider />
+          <MessageProvider />
         </StoreProvider>
       </body>
     </html>

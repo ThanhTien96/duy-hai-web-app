@@ -17,7 +17,7 @@ const YoutubeTop = ({ src, link, embed, title }: YoutubeTopProps) => {
   /** control modal */
   const [openVideo, setOpenVideo] = useState(false) 
   return (
-    <div className="h-[151px] w-full col-span-3 overflow-hidden relative">
+    <div className="h-[146px] w-full col-span-3 overflow-hidden relative">
       <Link target='_blank' href={link ? link : ''}>
         <Image
           className="w-full h-full object-cover"

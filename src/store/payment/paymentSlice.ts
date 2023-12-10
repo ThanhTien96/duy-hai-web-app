@@ -1,16 +1,26 @@
+import { IPaid } from "@/@types/order";
 import { IPaymentCardInfo } from "@/@types/payment";
 import { apiPaths } from "@/constants";
 import { http } from "@/http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
+export enum EPaymentMethod {
+    CASH = 'thanh toán khi nhận hàng',
+    CREDIT_CARD = 'thanh toán chuyển khoản',
+}
 
 export interface IPaymentSlice {
-    paymentMethod: IPaymentCardInfo[];
+    paymentCardInfo: IPaymentCardInfo[];
+    paymentMethod?: EPaymentMethod;
+    paid?: IPaid;
+
 }
 
 const initialState: IPaymentSlice = {
-    paymentMethod: [],
+    paymentCardInfo: [],
+    paymentMethod: undefined,
+    paid: undefined,
 };
 
 export const fetchPaymentInfoThunk = createAsyncThunk(
@@ -28,13 +38,25 @@ export const fetchPaymentInfoThunk = createAsyncThunk(
 const paymentSlice = createSlice({
     name: "paymentSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        setPaymentMethod: (state, {payload}: {type: string, payload: EPaymentMethod}) => {
+            state.paymentMethod = payload;
+        },
+        setPaid: (state, {payload}) => {
+            state.paid = payload
+        }
+    },
     extraReducers: builder => {
         builder.addCase(fetchPaymentInfoThunk.fulfilled, (state, {payload}) => {
-            state.paymentMethod = payload;
+            state.paymentCardInfo = payload;
         })
     }
 });
+
+export const {
+    setPaymentMethod,
+    setPaid
+} = paymentSlice.actions;
 
 export default paymentSlice.reducer;
 

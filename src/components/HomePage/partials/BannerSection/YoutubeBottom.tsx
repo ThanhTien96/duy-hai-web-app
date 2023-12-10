@@ -32,7 +32,7 @@ const YoutubeBottom = ({
       onClick={() => {
         setIframeSrc(embed ?? '')
         setOpenVideo(true)}}
-      className="w-full h-[180px] overflow-hidden relative cursor-pointer">
+      className="w-full h-[90px] lg:h-[180px] overflow-hidden relative cursor-pointer">
         <Image
           className="w-full h-full object-cover transition-all duration-200 hover:scale-110"
           src={src ?? sharedContent.emtyImage}

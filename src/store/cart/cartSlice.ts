@@ -20,6 +20,7 @@ const cartSlice = createSlice({
   name: 'cartSlice',
   initialState,
   reducers: {
+    resetCart: state => state,
     addToCart: (state, { payload }) => {
       const findOnCart = state.cartList.find(
         (ele) => ele.product.maSanPham === payload.product.maSanPham,
@@ -83,6 +84,7 @@ export const {
   addToCart,
   inscreaseProduct,
   decreaseProduct,
+  resetCart,
   deleteProductFormCart,
 } = cartSlice.actions;
 
