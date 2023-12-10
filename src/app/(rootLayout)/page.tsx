@@ -71,10 +71,7 @@ export default async function Home(props: any) {
         data.mainCategories &&
         Array.isArray(data.mainCategories) &&
         data?.mainCategories?.map((ele: IMainCategory) => {
-          if (
-            ele.maDanhMucChinh === PRODUCT_ID.saw ||
-            ele.maDanhMucChinh === PRODUCT_ID.lawnMower
-          ) {
+          
             return (
               <Wrapper key={ele?.maDanhMucChinh}>
                 <ProcductsSection
@@ -83,7 +80,6 @@ export default async function Home(props: any) {
                 />
               </Wrapper>
             );
-          }
         })}
       {/* news section */}
       <Wrapper>

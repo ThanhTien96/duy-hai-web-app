@@ -61,7 +61,7 @@ export default async function RootLayout({
           />
 
           <Suspense fallback={<Loading />}>
-            <div className="mt-[95px] lg:mt-[135px]">{children}</div>
+            <div className="mt-[95px] lg:mt-[87px]">{children}</div>
           </Suspense>
 
           <Footer categories={categories} />

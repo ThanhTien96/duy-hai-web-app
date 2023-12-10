@@ -1,13 +1,19 @@
+"use client"
+
 import { IProduct } from '@/@types/product';
 import { Title } from '@/components/shared';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { QuantityItem } from './partials';
 import { ButtonShared } from '@/components/global';
 import { FaHouse, FaPhone } from 'react-icons/fa6';
 import Link from 'next/link';
 import { CONTACT } from '@/constants/profileConst';
 import { IPageProductContent } from '@/app/(rootLayout)/san-pham/[id]/page';
+import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/navigation';
+import { setAlert } from '@/store/app/appSlice';
+import { addToCart, resetCart } from '@/store/cart/cartSlice';
 
 type TContentDetailProps = {
   className?: string;
@@ -20,6 +26,17 @@ const ContentDetail = ({
   className,
   staticContent,
 }: TContentDetailProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const [quantity, setQuantity] = useState<number>(1);
+
+  // handle add to Cart
+  const handleAddTocar = (quantity: number) => {
+    dispatch(
+      setAlert({ message: 'Thêm Giỏ Hàng Thành Công', status: 'success' }),
+    );
+    dispatch(addToCart({ product: data, quantity: quantity }));
+  };
   return (
     <div className={clsx(className)}>
       <div className="flex items-start justify-between flex-col h-full">
@@ -55,12 +72,15 @@ const ContentDetail = ({
         {/* quantity */}
         <div className="flex items-center gap-4 my-6 w-full">
           <p className="text-large">{staticContent?.contentDetail?.soLuong}: </p>
-          <QuantityItem defaultValue={1} className="w-[35%]" />
+          <QuantityItem defaultValue={1} onIncrease={() => setQuantity(quantity + 1)} onDecrease={() => setQuantity(quantity - 1)} className="w-[35%]" />
         </div>
         {/* action */}
         <div className="flex items-center gap-6 w-full">
-          <ButtonShared className="w-1/2" content="Thêm Giỏ Hàng" />
-          <ButtonShared className="w-1/2" content="Mua Hàng" />
+          <ButtonShared onClick={() => handleAddTocar(quantity)} className="w-1/2" content="Thêm Giỏ Hàng" />
+          <ButtonShared onClick={() => {
+            handleAddTocar(quantity)
+            router.push("/thanh-toan")
+          }} className="w-1/2" content="Mua Hàng" />
         </div>
 
         <div className="mt-4 flex flex-col gap-2">

@@ -7,6 +7,7 @@ import { ButtonShared } from '../..';
 import { useAppDispatch } from '@/store';
 import { IProduct, IProductMedia } from '@/@types/product';
 import { EMPTY_IMAGE } from '@/constants';
+import { useRouter } from 'next/navigation';
 
 type TOrderItemProps = {
   product?: IProduct;
@@ -15,6 +16,7 @@ type TOrderItemProps = {
 
 const OrderItem = ({ product, onAddToCart }: TOrderItemProps) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const router = useRouter();
 
   const baseImage =
     product &&
@@ -73,7 +75,15 @@ const OrderItem = ({ product, onAddToCart }: TOrderItemProps) => {
             htmlType="button"
             content="Thêm Giỏ Hàng"
           />
-          <ButtonShared htmlType="button" content="Thanh Toán" />
+          <ButtonShared
+            onClick={() => {
+              onAddToCart && onAddToCart(quantity);
+              setQuantity(1);
+              router.push('/thanh-toan')
+            }}
+            htmlType="button"
+            content="Thanh Toán"
+          />
         </div>
       </div>
     </div>
