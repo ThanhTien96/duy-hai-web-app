@@ -28,21 +28,21 @@ const ContactColumn = ({ className }: TContactColumnProps) => {
       </Title>
       <div className='flex flex-col gap-4 items-start'>
       {/* phone */}
-        <Link className="flex items-center gap-2" href={'tel:0788246979'}>
+        <Link className="flex items-center gap-2" href={'tel:0932871994'}>
           <span className="w-8 h-8 rounded-md flex items-center justify-center border border-solid border-white">
             <FaPhone />
           </span>
-          <p>0788246979</p>
+          <p>0932871994</p>
         </Link>
         {/* email */}
         <Link
           className="flex items-center gap-2"
-          href={'mail:thanhtien2094@gmail.com'}
+          href={'mail:haitratan@gmail.com'}
         >
           <span className="w-8 h-8 rounded-md flex items-center justify-center border border-solid border-white">
             <BsEnvelopeAt />
           </span>
-          <p>thanhtien2094@gmail.com</p>
+          <p>haitratan@gmail.com</p>
         </Link>
         {/* website */}
         <Link
