@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import clsx from 'clsx';
 import { HeaderApp } from '@/components/global';
 import { PageService } from '@/services';
-import { IMainCategory, IMenu } from '@/@types/global';
+import { IFooter, IMainCategory, IMenu } from '@/@types/global';
 import StoreProvider from '@/components/shared/StoreProvider';
 import Footer from '@/components/global/Footer';
 import { FONT_UBUNTU, FONT_NUNITO_SANS } from '@/font/font';
@@ -19,7 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
 async function getData() {
   const categories = await PageService.fetchMainCategory();
   const menu = await PageService.fetchMenu();
-  return { categories: categories.data.data, menu: menu.data.data };
+  const footer = await PageService.fetchFooter(); 
+  return { categories: categories.data.data, menu: menu.data.data, footer: footer.data.data[0] };
 }
 
 export default async function RootLayout({
@@ -30,10 +31,13 @@ export default async function RootLayout({
   const {
     menu,
     categories,
+    footer
   }: {
     menu: IMenu;
     categories: IMainCategory[];
+    footer: IFooter;
   } = await getData();
+ 
 
   return (
     <html lang="en">
@@ -64,7 +68,7 @@ export default async function RootLayout({
             <div className="mt-[95px] lg:mt-[87px]">{children}</div>
           </Suspense>
 
-          <Footer categories={categories} />
+          <Footer data={footer} categories={categories} />
           <LoadingProvider />
           <MessageProvider />
         </StoreProvider>

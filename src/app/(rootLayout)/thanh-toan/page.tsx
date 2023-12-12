@@ -59,7 +59,7 @@ export default function Home() {
       confirmButtonColor: '#ff8027',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Xác Nhận',
-      cancelButtonText: "Nhập Lại Thông Tin",
+      cancelButtonText: "Huỷ",
     }).then((result) => {
       if (result.isConfirmed) {
         handleOrderProduct(value)

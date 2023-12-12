@@ -89,6 +89,18 @@ class PageService {
     });
   }
 
+  // fetch product with subcategory
+  static async fetchProductWithCategory(subCate: string, signal?: AbortSignal) {
+    return await http({
+      url: apiPaths.productWithSubCategory,
+      method: "GET",
+      params: {
+        maDanhMucNho: subCate,
+      },
+      signal,
+    })
+  }
+
   // product detail
   static async fetchProductDetail(id: string) {
     return await http({
@@ -125,6 +137,14 @@ class PageService {
       method: 'POST',
       data: payload,
       signal
+    })
+  }
+
+  // get footer
+  static async fetchFooter() {
+    return await http({
+      url: apiPaths.footer,
+      method: "GET",
     })
   }
 }

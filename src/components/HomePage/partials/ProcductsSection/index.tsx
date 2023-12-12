@@ -5,11 +5,13 @@ import { ProductCard } from '@/components/global';
 import TitleSection from '@/components/global/TitleSection';
 import { IProduct } from '@/@types/product';
 import { ISubCategory } from '@/@types/global';
-import { Empty } from 'antd';
+import { Empty, Spin } from 'antd';
 import { EMPTY_IMAGE } from '@/constants';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useRouter } from 'next/navigation';
+import { PageService } from '@/services';
+import Loading from '@/app/(rootLayout)/loading';
 
 export type ProductSectionProps = {
   data?: IProduct[];
@@ -24,6 +26,7 @@ const ProductSection = ({
 }: ProductSectionProps) => {
   const [productList, setProductList] = useState<IProduct[]>([]);
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     subCategories?.forEach((ele: ISubCategory) =>
@@ -50,11 +53,37 @@ const ProductSection = ({
     },
   };
 
+  // handle filter product with sub category
+  const handleFilterProductWithType = async (subCategory: string) => {
+    if (!subCategory) {
+      subCategories?.forEach((ele: ISubCategory) =>
+        ele.danhSachSanPham?.map((prod: IProduct) =>
+          setProductList((current) => [...current, prod]),
+        ),
+      ) ?? [];
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await PageService.fetchProductWithCategory(subCategory);
+
+      if (response) {
+        setProductList(response.data.data.danhSachSanPham);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       {/* Z */}
-      <TitleSection childTitle={subCategories} title={title} />
-      <div>
+      <TitleSection
+        handleChooseType={handleFilterProductWithType}
+        childTitle={subCategories}
+        title={title}
+      />
+      <Spin spinning={loading}>
         {/* map products */}
         {productList && Array.isArray(productList) && productList.length > 0 ? (
           <Splide {...slideProps}>
@@ -74,7 +103,7 @@ const ProductSection = ({
             <Empty description="0 Sản Phẩm" />
           </div>
         )}
-      </div>
+      </Spin>
     </div>
   );
 };

@@ -11,9 +11,10 @@ import clsx from 'clsx';
 type TCategoryColumnProps = {
   className?: string;
   categories?: IMainCategory[];
+  title?: string;
 };
 
-const CategoryColumn = ({ className, categories }: TCategoryColumnProps) => {
+const CategoryColumn = ({ className, categories, title }: TCategoryColumnProps) => {
   const slideProps = {
     options: {
       type: 'loop',
@@ -28,11 +29,11 @@ const CategoryColumn = ({ className, categories }: TCategoryColumnProps) => {
         pauseOnFocus: true,
         pauseOnHover: true,
         rewind: true,
-        speed: 0.8,
+        speed: 0.3,
       },
       lazyLoad: true,
       reducedMotion: {
-        speed: 1,
+        speed: 0.3,
         rewindSpeed: 0,
         autoplay: true,
       },
@@ -41,7 +42,7 @@ const CategoryColumn = ({ className, categories }: TCategoryColumnProps) => {
   };
   return (
     <div className={clsx(className)}>
-      <Title className='text-[18px] lg:text-[22px] font-bold mb-2 capitalize border-b border-solid border-gray-border/40 pb-2' level={3}>Danh Mục</Title>
+      <Title className='text-[18px] lg:text-[22px] font-bold mb-2 capitalize border-b border-solid border-gray-border/40 pb-2' level={3}>{title}</Title>
       {categories && (
         <div className='h-[200px] overflow-hidden'>
           <Splide {...slideProps}>

@@ -3,7 +3,12 @@
 import { IPagination, ISubCategory } from '@/@types/global';
 import { IProduct } from '@/@types/product';
 import React, { useState } from 'react';
-import { ProductCard, ProductListPagination, SectionLoading, TitleSection } from '../global';
+import {
+  ProductCard,
+  ProductListPagination,
+  SectionLoading,
+  TitleSection,
+} from '../global';
 import { PageService } from '@/services';
 import { EMPTY_IMAGE, PAGE_SIZE } from '@/constants';
 import clsx from 'clsx';
@@ -49,14 +54,17 @@ const ProductWitSubCategory = ({
     <div>
       <div className={clsx('relative')}>
         {/* Title section */}
-        <TitleSection  title={title} />
+        <TitleSection title={title} />
         {/* product */}
         {!sectionLoading && (
           <div className="grid grid-cols-12 gap-4 lg:gap-8">
-            {products && products.data?.danhSachSanPham &&Array.isArray(products.data.danhSachSanPham) && products.data.danhSachSanPham.length > 0 ? (
+            {products &&
+            products.data?.danhSachSanPham &&
+            Array.isArray(products.data.danhSachSanPham) &&
+            products.data.danhSachSanPham.length > 0 ? (
               products.data?.danhSachSanPham?.map((ele: IProduct) => (
                 <ProductCard
-                product={ele}
+                  product={ele}
                   className="col-span-6 lg:col-span-3"
                   key={ele.maSanPham}
                   onClick={() => router.push(`/san-pham/${ele.maSanPham}`)}
@@ -69,16 +77,20 @@ const ProductWitSubCategory = ({
             )}
           </div>
         )}
-        {!sectionLoading && products && products?.data?.danhSachSanPham && Array.isArray(products.data.danhSachSanPham) && products.data.danhSachSanPham.length > 0 && (
-          <div className="col-span-12 text-center mt-4 lg:mt-8">
-            <Pagination
-              onChange={(e) => handleFetchProduct(e)}
-              total={products && products.total}
-              defaultCurrent={products && products.currentPage}
-              pageSize={PAGE_SIZE.product}
-            />
-          </div>
-        )}
+        {!sectionLoading &&
+          products &&
+          products?.data?.danhSachSanPham &&
+          Array.isArray(products.data.danhSachSanPham) &&
+          products.data.danhSachSanPham.length > 0 && (
+            <div className="col-span-12 text-center mt-4 lg:mt-8">
+              <Pagination
+                onChange={(e) => handleFetchProduct(e)}
+                total={products && products.total}
+                defaultCurrent={products && products.currentPage}
+                pageSize={PAGE_SIZE.product}
+              />
+            </div>
+          )}
         {sectionLoading && <SectionLoading />}
       </div>
     </div>

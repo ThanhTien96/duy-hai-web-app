@@ -22,6 +22,9 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
     data && setProductList(data);
   }, [data]);
 
+  
+
+
   const slidePropsTop = {
     options: {
       type: 'loop',

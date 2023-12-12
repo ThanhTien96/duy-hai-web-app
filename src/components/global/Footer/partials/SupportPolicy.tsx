@@ -1,3 +1,4 @@
+import { IFooterLink } from '@/@types/global';
 import { Title } from '@/components/shared';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -5,9 +6,11 @@ import React from 'react';
 
 type TSupportPolicyProps = {
   className?: string;
+  title?: string;
+  linkList?: IFooterLink[];
 };
 
-const SupportPolicy = ({ className }: TSupportPolicyProps) => {
+const SupportPolicy = ({ className, title, linkList }: TSupportPolicyProps) => {
   return (
     <div className={clsx(className)}>
       {/* title */}
@@ -15,14 +18,17 @@ const SupportPolicy = ({ className }: TSupportPolicyProps) => {
         level={3}
         className="text-[18px] lg:text-[22px] font-bold mb-2 capitalize border-b border-solid border-gray-border/40 pb-2"
       >
-        Thông Tin Liên Hệ
+        {title}
       </Title>
 
       <ul className="flex flex-col gap-4 items-start list-disc">
-        <li>Hướng dẫn mua hàng</li>
-        <li>Thanh toán - vận chuyển</li>
-        <li>Chính sách mua hàng</li>
-        <li>Chính sách hoàn trả</li>
+        {linkList &&
+          Array.isArray(linkList) &&
+          linkList.map((ele) => (
+            <li key={ele.id}>
+              <Link href={ele.link}>{ele.title}</Link>
+            </li>
+          ))}
       </ul>
     </div>
   );

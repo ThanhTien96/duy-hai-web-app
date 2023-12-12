@@ -12,4 +12,6 @@ export const apiPaths = {
   news: '/layTinTucPhanTrang',
   paymentInfo: '/layDanhSachThanhToan',
   orderProduct: '/themDonHang',
+  footer: "/footers",
+  productWithSubCategory: "/laySanPhamTheoDanhMucNho"
 };
