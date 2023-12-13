@@ -16,15 +16,15 @@ export type TNewsSectionProps = {
 };
 
 const NewsSection = async ({ newsList }: TNewsSectionProps) => {
-
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <AppTitle title="Tin Tức & Sự Kiện" />
       {/* render item */}
       <div className="grid grid-cols-12 gap-4 lg:gap-8 w-full">
         {/* main item */}
         <div className="col-span-12 lg:col-span-4">
           <NewsMainItem
+            id={newsList?.data[0]?.maTinTuc}
             src={
               newsList &&
               Array.isArray(newsList.data) &&
@@ -44,7 +44,7 @@ const NewsSection = async ({ newsList }: TNewsSectionProps) => {
             }
             createAt={
               newsList && Array.isArray(newsList.data)
-                ? moment(newsList?.data[0]?.updateAt).format('DD/MM/YYYY')
+                ? newsList?.data[0]?.updateAt
                 : ''
             }
           />
@@ -59,10 +59,17 @@ const NewsSection = async ({ newsList }: TNewsSectionProps) => {
                 .map((ele: INews, index: number) => (
                   <NewsSubItem
                     key={index}
-                    src={ele?.hinhAnh && Array.isArray(ele.hinhAnh) ? ele?.hinhAnh[0]?.hinhAnh : EMPTY_IMAGE}
+                    id={ele.maTinTuc}
+                    src={
+                      ele?.hinhAnh && Array.isArray(ele.hinhAnh)
+                        ? ele?.hinhAnh[0]?.hinhAnh
+                        : EMPTY_IMAGE
+                    }
                     title={ele.tieuDe}
                     content={ele.noiDungNgan}
-                    createAt={ele.createAt && moment(ele?.updateAt).format('DD/MM/YYYY')}
+                    createAt={
+                      ele.createAt && moment(ele?.updateAt).format('DD/MM/YYYY')
+                    }
                   />
                 ))}
           </div>
@@ -75,11 +82,18 @@ const NewsSection = async ({ newsList }: TNewsSectionProps) => {
                 .splice(1)
                 .map((ele: any, index: number) => (
                   <NewsSubItem
-                  key={index}
-                  src={ele?.hinhAnh && Array.isArray(ele.hinhAnh) ? ele?.hinhAnh[0]?.hinhAnh : EMPTY_IMAGE}
-                  title={ele.tieuDe}
-                  content={ele.noiDungNgan}
-                  createAt={ele.createAt && moment(ele?.updateAt).format('DD/MM/YYYY')}
+                    key={index}
+                    id={ele.maTinTuc}
+                    src={
+                      ele?.hinhAnh && Array.isArray(ele.hinhAnh)
+                        ? ele?.hinhAnh[0]?.hinhAnh
+                        : EMPTY_IMAGE
+                    }
+                    title={ele.tieuDe}
+                    content={ele.noiDungNgan}
+                    createAt={
+                      ele.createAt && moment(ele?.updateAt).format('DD/MM/YYYY')
+                    }
                   />
                 ))}
           </div>

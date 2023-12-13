@@ -13,5 +13,6 @@ export const apiPaths = {
   paymentInfo: '/layDanhSachThanhToan',
   orderProduct: '/themDonHang',
   footer: "/footers",
-  productWithSubCategory: "/laySanPhamTheoDanhMucNho"
+  productWithSubCategory: "/laySanPhamTheoDanhMucNho",
+  about: "/layNoiDungGioiThieu",
 };

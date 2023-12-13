@@ -16,6 +16,27 @@ async function getPageData() {
   return { data: mainCategories.data.data };
 }
 
+export async function generateMetadata() {
+  return {
+      title: 'Nông Cơ Hải Trà Tân - Sản Phẩm',
+      description:
+        'Cửa Hàng HẢI TRÀ TÂN - HẢI MÁY BÃI - 0932871994. Địa chỉ : Thôn 1 - Xã Trà Tân - Huyện Đức Linh - Tỉnh Bình Thuận',
+      openGraph: {
+        title: 'Nông Cơ Hải Trà Tân - Sản Phẩm',
+        description:
+          'Cửa Hàng HẢI TRÀ TÂN - HẢI MÁY BÃI - 0932871994. Địa chỉ : Thôn 1 - Xã Trà Tân - Huyện Đức Linh - Tỉnh Bình Thuận',
+        images: [
+          {
+            url: '/logo/hai-tra-tan-logo.png',
+            width: 32,
+            height: 32,
+          },
+        ],
+      },
+      keywords: 'hải trà tân, máy cưa, nông cơ, máy cưa giá rẻ, máy cưa stihl, máy cưa chính hãng',
+    }
+}
+
 export default async function Page() {
   const { data } = await getPageData();
 

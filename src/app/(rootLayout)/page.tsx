@@ -6,7 +6,7 @@ import {
 import clsx from 'clsx';
 import { Wrapper } from '@/components/shared';
 import '../../styles/homePage.scss';
-import NewsSection from '@/components/HomePage/partials/NewsSection';
+import NewsSection from '@/components/global/NewsSection';
 import ContactSection from '@/components/HomePage/partials/ContactSection';
 import { PageService } from '@/services';
 import { IMainCategory, IPagination } from '@/@types/global';

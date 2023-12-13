@@ -118,7 +118,7 @@ class PageService {
     perPage = PAGE_SIZE.news,
   }: {
     page: number;
-    perPage: number;
+    perPage?: number;
   }) {
     return await http({
       url: apiPaths.news,
@@ -144,6 +144,14 @@ class PageService {
   static async fetchFooter() {
     return await http({
       url: apiPaths.footer,
+      method: "GET",
+    })
+  }
+
+  // get about page content
+  static async fetchAboutPage() {
+    return await http({
+      url: apiPaths.about,
       method: "GET",
     })
   }

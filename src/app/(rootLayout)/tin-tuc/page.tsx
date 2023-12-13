@@ -1,26 +1,23 @@
-import { MarkdownX } from '@/components/global';
+import { IPagination } from '@/@types/global';
+import { NewsProvider } from '@/components/NewsPage';
 import { Wrapper } from '@/components/shared';
-import { EMPTY_IMAGE } from '@/constants';
+import { PAGE_SIZE } from '@/constants';
 import { PageService } from '@/services';
 import { AppstoreOutlined, HomeOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
-import Image from 'next/image';
 
-type AboutPageProps = {};
-
-async function getData() {
-  const res = await PageService.fetchAboutPage();
-
-  return { data: res.data.data[0] };
+async function getData(pagination: { page: number; perPage?: number }) {
+  const res = await PageService.fetchAllNews(pagination);
+  return { data: res.data };
 }
 
 export async function generateMetadata() {
     return {
-        title: 'Nông Cơ Hải Trà Tân - Giới Thiệu',
+        title: 'Nông Cơ Hải Trà Tân - Tin Tức',
         description:
           'Cửa Hàng HẢI TRÀ TÂN - HẢI MÁY BÃI - 0932871994. Địa chỉ : Thôn 1 - Xã Trà Tân - Huyện Đức Linh - Tỉnh Bình Thuận',
         openGraph: {
-          title: 'Nông Cơ Hải Trà Tân - Giới Thiệu',
+          title: 'Nông Cơ Hải Trà Tân - Tin Tức',
           description:
             'Cửa Hàng HẢI TRÀ TÂN - HẢI MÁY BÃI - 0932871994. Địa chỉ : Thôn 1 - Xã Trà Tân - Huyện Đức Linh - Tỉnh Bình Thuận',
           images: [
@@ -31,12 +28,12 @@ export async function generateMetadata() {
             },
           ],
         },
-        keywords: 'nông cơ duy hải, nông cơ, nông cơ hải trà tân, hải trà tân, máy cưa',
+        keywords: 'nông cơ duy hải, nông cơ, nông cơ hải trà tân, tin tức thị trường',
       }
 }
 
-export default async function About(props: AboutPageProps) {
-  const { data } = await getData();
+export default async function Page() {
+  const { data } = await getData({ page: 1, perPage: 8 });
   return (
     <Wrapper>
       <Breadcrumb
@@ -53,24 +50,13 @@ export default async function About(props: AboutPageProps) {
           {
             title: (
               <div className="flex items-center gap-2">
-                <AppstoreOutlined /> Giới Thiệu
+                <AppstoreOutlined /> Tin Tức
               </div>
             ),
           },
         ]}
       />
-      <div className="flex flex-col items-start gap-8">
-        <div className="w-full h-[200px] lg:h-[400px]">
-          <Image
-            className="w-full h-full object-cover"
-            width={0}
-            height={0}
-            src={data?.hinhAnh[0].hinhAnh ?? EMPTY_IMAGE}
-            alt="nông cơ hải trà tân"
-          />
-        </div>
-        <MarkdownX content={data?.noiDung} />
-      </div>
+      <NewsProvider data={data?.data} pagination={{currentPage: data?.currentPage, total: data?.total, totalPage: data?.totalPage}} />
     </Wrapper>
   );
 }
