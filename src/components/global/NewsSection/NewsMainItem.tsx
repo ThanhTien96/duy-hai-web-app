@@ -1,6 +1,9 @@
+"use client"
+
 import sharedContent from '@/utils/shared';
 import moment from 'moment';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 type NewsMainItemProps = {
@@ -9,7 +12,6 @@ type NewsMainItemProps = {
     content?: string;
     createAt?: string;
     id?: string;
-    onClick?: () => void;
 }
 
 const NewsMainItem = ({
@@ -18,11 +20,13 @@ const NewsMainItem = ({
     content,
     createAt,
     id,
-    onClick,
 }: NewsMainItemProps) => {
+    const router = useRouter();
   return (
     <div 
-    onClick={onClick}
+    onClick={() => {
+        router.push(`/tin-tuc/${id}`)
+    }}
     className='w-full h-[400px] flex flex-col border border-gray-border rounded-sm p-2 cursor-pointer'>
         <div className='h-8/12 relative overflow-hidden'>
             <Image className='w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-200' src={src ?? sharedContent.emtyImage} width={0} height={0} alt={title ?? 'hải trà tân'} />

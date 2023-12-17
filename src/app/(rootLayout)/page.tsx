@@ -10,7 +10,7 @@ import NewsSection from '@/components/global/NewsSection';
 import ContactSection from '@/components/HomePage/partials/ContactSection';
 import { PageService } from '@/services';
 import { IMainCategory, IPagination } from '@/@types/global';
-import { FALLBACK_SEO, PRODUCT_ID } from '@/constants';
+import { FALLBACK_SEO } from '@/constants';
 import { IBanner, IYoutubePost } from '@/@types/home';
 import { IProduct } from '@/@types/product';
 import { INews } from '@/@types/news';

@@ -10,6 +10,7 @@ export const apiPaths = {
   productDetail: '/layChiTietSanPham',
   productPagination: '/laySanPhamPhanTrang',
   news: '/layTinTucPhanTrang',
+  newsDetail: "/chiTietTinTuc",
   paymentInfo: '/layDanhSachThanhToan',
   orderProduct: '/themDonHang',
   footer: "/footers",

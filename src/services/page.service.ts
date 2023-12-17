@@ -130,6 +130,17 @@ class PageService {
     });
   }
 
+  // fetch news detail
+  static async fetchNewsDetail(id: string) {
+    return http({
+      url: apiPaths.newsDetail,
+      method: "GET",
+      params: {
+        maTinTuc: id
+      }
+    })
+  }
+
   /** ORDER PRODUCT */
   static async orderProduct(payload: IOrderPayload, signal?: AbortSignal) {
     return await http({

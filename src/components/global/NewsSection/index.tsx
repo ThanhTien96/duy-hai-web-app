@@ -1,9 +1,7 @@
 import { AppTitle } from '@/components/global';
-import { Wrapper } from '@/components/shared';
 import React from 'react';
 import NewsSubItem from './NewsSubItem';
 import NewsMainItem from './NewsMainItem';
-import DrashLog from '@/components/shared/DrashLog';
 import { INews } from '@/@types/news';
 import { IPagination } from '@/@types/global';
 import { EMPTY_IMAGE } from '@/constants';

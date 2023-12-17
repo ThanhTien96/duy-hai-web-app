@@ -1,8 +1,11 @@
+"use client"
+
 import { Title } from '@/components/shared';
 import sharedContent from '@/utils/shared';
 import clsx from 'clsx';
 import moment from 'moment';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 type TNewsCardProps = {
@@ -16,8 +19,12 @@ type TNewsCardProps = {
 }
 
 const NewsCard = ({src, title, content, createAt, id, onClick, className}: TNewsCardProps) => {
+  const router = useRouter();
   return (
-    <div onClick={onClick} className={clsx(className, "h-[300px] overflow-hidden flex flex-col items-start gap-2 border border-solid border-gray-200")}>
+    <div onClick={() => {
+      onClick;
+      router.push(`/tin-tuc/${id}`)
+  }} className={clsx(className, "h-[300px] overflow-hidden flex flex-col items-start gap-2 border border-solid border-gray-200")}>
         <div className='h-2/4 w-full overflow-hidden'>
             <Image className='w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-200' src={src ?? sharedContent.emtyImage} width={0} height={0} alt={title ?? 'hải trà tân'}/>
         </div>

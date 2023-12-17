@@ -20,7 +20,6 @@ type TNewsProviderProps = {
   className?: string;
 };
 
-
 const NewsProvider = ({ data, pagination, className }: TNewsProviderProps) => {
   const [newsList, setNewsList] = useState<INews[]>();
   const [mainNews, setMainNews] = useState<INews | undefined>(data && data[0]);
@@ -40,23 +39,28 @@ const NewsProvider = ({ data, pagination, className }: TNewsProviderProps) => {
   }, [data]);
 
   //   fetch news
-  const handleChangePage = useCallback(async (page: number) => {
-    dispatch(setLoading(true));
-    try {
-      const res = await PageService.fetchAllNews({ page });
-      if (res.status === 200) {
-        setMainNews(res.data.data[0]);
-        setNewsList(res.data.data);
-        setPagi({currentPage: res?.data?.currentPage, total: res?.data?.total, totalPage: res?.data?.totalPage});
+  const handleChangePage = useCallback(
+    async (page: number) => {
+      dispatch(setLoading(true));
+      try {
+        const res = await PageService.fetchAllNews({ page });
+        if (res.status === 200) {
+          setMainNews(res.data.data[0]);
+          setNewsList(res.data.data);
+          setPagi({
+            currentPage: res?.data?.currentPage,
+            total: res?.data?.total,
+            totalPage: res?.data?.totalPage,
+          });
+        }
+      } catch (err) {
+        // emty block
+      } finally {
+        dispatch(setLoading(false));
       }
-    } catch (err) {
-      // emty block
-    } finally {
-      dispatch(setLoading(false));
-    }
-  },[data, pagination]);
-
-  
+    },
+    [data, pagination],
+  );
 
   return !loading ? (
     <div className={clsx(className)}>
@@ -64,6 +68,7 @@ const NewsProvider = ({ data, pagination, className }: TNewsProviderProps) => {
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12 lg:col-span-7">
           <NewsMainItem
+            id={mainNews?.maTinTuc}
             src={mainNews?.hinhAnh && mainNews.hinhAnh[0].hinhAnh}
             title={mainNews?.tieuDe}
             content={mainNews?.noiDungNgan}
@@ -78,6 +83,7 @@ const NewsProvider = ({ data, pagination, className }: TNewsProviderProps) => {
                 .slice(1, 4)
                 .map((ele: INews, index: number) => (
                   <NewsSubItem
+                    id={ele.maTinTuc}
                     key={index}
                     src={
                       ele?.hinhAnh && Array.isArray(ele.hinhAnh)
@@ -99,6 +105,7 @@ const NewsProvider = ({ data, pagination, className }: TNewsProviderProps) => {
           newsList.slice(4, -1).map((news: INews) => {
             return (
               <NewsCard
+                id={news.maTinTuc}
                 className="col-span-12 md:col-span-6 lg:col-span-3"
                 key={news.maTinTuc}
                 src={news.hinhAnh && news.hinhAnh[0].hinhAnh}

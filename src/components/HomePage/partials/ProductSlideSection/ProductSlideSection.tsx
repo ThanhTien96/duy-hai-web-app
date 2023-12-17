@@ -41,16 +41,10 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
         },
       },
       autoScroll: {
-        pauseOnFocus: true,
-        pauseOnHover: true,
+        pauseOnFocus: false,
+        pauseOnHover: false,
         rewind: true,
-        speed: 0.6,
-      },
-      lazyLoad: true,
-      reducedMotion: {
-        speed: 1,
-        rewindSpeed: 0,
-        autoplay: true,
+        speed: 0.4,
       },
     },
     extensions: { AutoScroll },
@@ -72,16 +66,10 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
         },
       },
       autoScroll: {
-        pauseOnFocus: true,
-        pauseOnHover: true,
+        pauseOnFocus: false,
+        pauseOnHover: false,
         rewind: true,
-        speed: 0.6,
-      },
-      lazyLoad: true,
-      reducedMotion: {
-        speed: 1,
-        rewindSpeed: 0,
-        autoplay: true,
+        speed: 0.4,
       },
     },
     extensions: { AutoScroll },
@@ -126,9 +114,11 @@ const ProductSlideSection = ({ title, data }: TProductSlideSectionProps) => {
                 (item: IProduct) =>
                   item?.danhMucNho?.maDanhMucChinh === PRODUCT_ID.lawnMower,
               )
-              ?.map((ele: IProduct) => (
-                <SplideSlide key={ele.maSanPham}>
+              ?.map((ele: IProduct, idx: number) => (
+                <SplideSlide className="z-10"  key={`${ele.maSanPham}-${idx}`}>
                   <ProductCard
+                    className='z-20'
+                  key={ele.maSanPham}
                     product={ele}
                     onClick={() => router.push(`san-pham/${ele.maSanPham}`)}
                   />

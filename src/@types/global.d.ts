@@ -3,7 +3,7 @@ import { IProduct } from './product';
 export interface IMediaBase {
   readonly id: string;
   hinhAnh: string;
-  maTinTuc: string;
+  maTinTuc?: string;
 }
 
 export interface IPagination {
