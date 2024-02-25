@@ -25,10 +25,10 @@ const locationSlice = createSlice({
             state.provinces = payload;
         });
         builder.addCase(fetchDistrictsThunk.fulfilled, (state, {payload}) => {
-            state.districts = payload.districts;
+            state.districts = payload;
         });
         builder.addCase(fetchWardsThunk.fulfilled, (state, {payload}) => {
-            state.wards = payload.wards
+            state.wards = payload;
         })
     }
 });

@@ -6,12 +6,11 @@ export const fetchProvincesThunk = createAsyncThunk(
     "fetchProvinces",
     async (_, thunkApi) => {
         const res = await httpLocation({
-            url: "",
+            url: "province",
             method: "GET",
             signal: thunkApi.signal
         });
-
-        return res.data
+        return res.data.results
     }
 )
 
@@ -19,17 +18,13 @@ export const fetchProvincesThunk = createAsyncThunk(
 // fetch district
 export const fetchDistrictsThunk = createAsyncThunk(
     "fetchDistrict",
-    async (code: number, thunkApi) => {
+    async (prodvinceId: string, thunkApi) => {
         const res = await httpLocation({
-            url: `/p/${code}`,
+            url: `/province/district/${prodvinceId}`,
             method: "GET",
-            params:{
-                depth: 2
-            },
             signal: thunkApi.signal
         });
-
-        return res.data
+        return res.data.results
     }
 )
 
@@ -38,14 +33,11 @@ export const fetchWardsThunk = createAsyncThunk(
     "fetchWards",
     async (code: number, {signal}) => {
         const res = await httpLocation({
-            url: `/d/${code}`,
+            url: `/province/ward/${code}`,
             method: "GET",
-            params: {
-                depth: 2
-            },
             signal
         });
-
-        return res.data
+console.log("wards", res);
+        return res.data.results
     }
 )

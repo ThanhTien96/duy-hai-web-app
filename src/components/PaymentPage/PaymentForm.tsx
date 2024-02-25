@@ -139,14 +139,14 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
                 )
               }
               onChange={(value, option: any) => {
-                storeDispatch(fetchDistrictsThunk(Number(value)));
+                storeDispatch(fetchDistrictsThunk(value));
                 setFieldValue('tinh', option.label);
               }}
               options={
-                provinces &&
-                provinces.map((province: IProvinceType) => ({
-                  value: province.code,
-                  label: province.name,
+                provinces && 
+                provinces?.map((province: IProvinceType) => ({
+                  value: province.province_id,
+                  label: province.province_name,
                 }))
               }
             />
@@ -184,9 +184,9 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
               }}
               options={
                 districts &&
-                districts.map((province: IDistrictType) => ({
-                  value: province.code,
-                  label: province.name,
+                districts.map((districts: IDistrictType) => ({
+                  value: districts.district_id,
+                  label: districts.district_name,
                 }))
               }
             />
@@ -214,9 +214,9 @@ const PaymentForm = ({ onSubmit }: TPaymentFormProps) => {
               }}
               options={
                 wards &&
-                wards.map((province: IWardType) => ({
-                  value: province.code,
-                  label: province.name,
+                wards.map((wards: IWardType) => ({
+                  value: wards.ward_id,
+                  label: wards.ward_name,
                 }))
               }
             />

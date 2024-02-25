@@ -21,9 +21,8 @@ import clsx from 'clsx';
 import { EPaymentMethod, setPaymentMethod } from '@/store/payment/paymentSlice';
 import { CopyOutlined } from '@ant-design/icons';
 
-type Props = {};
 
-const PaymentItemInfo = (props: Props) => {
+const PaymentItemInfo = () => {
   const { cartList } = useAppSelector((state) => state.cart);
   const { paymentCardInfo } = useAppSelector((state) => state.payment);
   const dispatch = useAppDispatch();
