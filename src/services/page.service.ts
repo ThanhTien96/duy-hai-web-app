@@ -166,6 +166,14 @@ class PageService {
       method: "GET",
     })
   }
+
+  // get contact page contnet
+  static async fetchContactPage() {
+    return await http({
+      url: apiPaths.contactPage,
+      method: "GET"
+    })
+  }
 }
 
 export { PageService };

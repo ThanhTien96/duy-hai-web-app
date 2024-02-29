@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Form, Input, Typography } from 'antd';
+import { ConfigProvider, Form, Input, Typography } from 'antd';
 import { ButtonShared } from '..';
 import { ButtonType } from '../ButtonShared/Index';
 
@@ -17,11 +17,18 @@ const layout = {
 const onFinish = (values: any) => {
   console.log(values);
 };
-type ContactFormProps = {};
+type ContactFormProps = {
+  theme?: "dark" | "light"
+};
 
-const ContactForm = (props: ContactFormProps) => {
+const ContactForm = ({theme = "dark"}: ContactFormProps) => {
   return (
-    <div>
+    <ConfigProvider theme={{
+      token: {
+        colorText: theme == "light" ? "#000" : "#fff",
+        colorPrimary: "#ff8027"
+      },
+    }}>
       <Form
         size="middle"
         {...layout}
@@ -32,25 +39,25 @@ const ContactForm = (props: ContactFormProps) => {
         <Form.Item
           className="w-full"
           name={'name'}
-          label={<Text className='text-white'>Họ Và Tên</Text>}
+          label={"Họ Tên"}
           rules={[{ required: true, message: 'Vui lòng nhập họ và tên!' }]}
         >
           <Input size='middle' placeholder="Họ và tên" />
         </Form.Item>
-        <Form.Item className='w-full !text-white'name={'email'} label={<Text className='text-white'>Email</Text>} rules={[{ type: 'email' }]}>
+        <Form.Item className='w-full !text-white'name={'email'} label={"Email"} rules={[{ type: 'email' }]}>
           <Input size='middle' placeholder="Email" />
         </Form.Item>
         <Form.Item
           className="w-full"
           name={'phoneNumber'}
-          label={<Text className='text-white'>Số Điện Thoại</Text>}
+          label={"Số Điện Thoại"}
         >
           <Input size='middle' className="w-full" placeholder="Số Điện Thoại" />
         </Form.Item>
-        <Form.Item className="w-full" name={'address'} label={<Text className='text-white'>Địa Chỉ</Text>}>
+        <Form.Item className="w-full" name={'address'} label={"Địa Chỉ"}>
           <Input size='middle' placeholder="Địa Chỉ" />
         </Form.Item>
-        <Form.Item className="w-full" name={'note'} label={<Text className='text-white'>Ghi Chú</Text>}>
+        <Form.Item className="w-full" name={'note'} label={"Ghi Chú"}>
           <Input.TextArea rows={5} placeholder="Ghi Chú" />
         </Form.Item>
         <Form.Item
@@ -65,7 +72,7 @@ const ContactForm = (props: ContactFormProps) => {
           />
         </Form.Item>
       </Form>
-    </div>
+    </ConfigProvider>
   );
 };
 

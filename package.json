@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn run open-brower && next dev",
+    "dev": "next dev",
     "open-brower": "start http://localhost:3000",
     "build": "next build",
     "start": "next start",

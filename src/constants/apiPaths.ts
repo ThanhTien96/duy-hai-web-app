@@ -16,4 +16,5 @@ export const apiPaths = {
   footer: "/footers",
   productWithSubCategory: "/laySanPhamTheoDanhMucNho",
   about: "/layNoiDungGioiThieu",
+  contactPage: "/contactPages"
 };
