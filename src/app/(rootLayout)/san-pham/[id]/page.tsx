@@ -93,7 +93,7 @@ export default async function ProductDetailPage({
   return (
     <Wrapper>
       <Breadcrumb
-        className="pb-2 border-b border-dashed border-gray-border mb-8"
+        className="pb-2 border-b border-dashed border-gray-border mb-8 mt-4"
         items={[
           {
             href: '/',

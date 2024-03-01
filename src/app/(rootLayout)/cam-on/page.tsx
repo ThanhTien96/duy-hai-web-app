@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <Wrapper>
       <Breadcrumb
-        className="border-b border-dashed border-gray-border pb-2"
+        className="pb-2 border-b border-dashed border-gray-border mb-4 mt-4"
         items={[
           {
             href: '/',
