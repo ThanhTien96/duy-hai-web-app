@@ -38,7 +38,6 @@ export async function generateMetadata() {
 
 export default async function About() {
   const content = await getData();
-  console.log('☣️ >>> About >>> content: ', content.data);
 
   return (
     <Wrapper>

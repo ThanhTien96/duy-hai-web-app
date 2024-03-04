@@ -4,7 +4,6 @@ import { Wrapper } from '@/components/shared';
 import DrashLog from '@/components/shared/DrashLog';
 import { FALLBACK_SEO, PAGE_SIZE } from '@/constants';
 import { PageService } from '@/services';
-import { stringToSlug } from '@/utils/common';
 import { ClusterOutlined, HomeOutlined, SettingOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 

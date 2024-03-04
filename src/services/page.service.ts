@@ -174,6 +174,14 @@ class PageService {
       method: "GET"
     })
   }
+
+  // get fix post 
+  static async fetchFixPosts() {
+    return await http({
+      url: apiPaths.fixpost,
+      method: "GET"
+    })
+  }
 }
 
 export { PageService };
